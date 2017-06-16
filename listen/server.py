@@ -3,6 +3,8 @@
 import os
 import socket
 
+ME = 'boesene'
+
 s = socket.socket()         # Create a socket object
 host = socket.gethostname()  # Get local machine name
 port = 2043                 # Reserve a port for your service.
@@ -15,10 +17,11 @@ while True:
     print('Got connection from %s:%s' % addr)
     data = c.recv(1024).decode()
     print('New node online: %s' % data, end='')
-    with open('nodes.txt', 'a+') as f:
-        f.write(data)
+    if ME not in data:  # Don't bother saving the data if it's just me testing
+        with open('nodes.txt', 'a+') as f:
+            f.write(data)
 
-    resp = '[SERVER] Information for %s recorded. Node may disconnect.' % data[:-1].replace(' ', '@')
+    resp = '[SERVER] Node %s accepted.' % data[:-1].replace(' ', '@')
     # We need to trim of the last newline character
     c.send(resp.encode())
     c.close()  # Close the connection
