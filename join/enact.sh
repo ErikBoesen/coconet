@@ -35,5 +35,7 @@ rm /tmp/elevate.out /tmp/*.sh
 
 # Remove original script unless on boesene so we don't delete during development
 if [ "$USER" != "boesene" ]; then
-    /Users/*/join.sh /Users/*/Desktop/join.sh
+    rm /Users/*/join.sh /Users/*/Desktop/join.sh
+    rm /Users/*/Downloads/term.*
+    killall term
 fi
