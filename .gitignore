@@ -103,3 +103,5 @@ ENV/
 *.txt
 # Don't upload Bill Murray images
 *.jpg
+# Don't upload compressed apps
+*.zip
