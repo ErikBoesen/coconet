@@ -17,10 +17,10 @@ while read node; do
     printf "Pinging node $USER@$HOSTNAME... "
     ping -t 1 -c 1 $HOSTNAME > /dev/null
     if [ "$?" = 0 ]; then
-        echo -e "up."
+        echo "up."
         UP=$((UP+1))
     else
-        echo -e "down."
+        echo "down."
         DOWN=$((DOWN+1))
     fi
 done <$FILE
