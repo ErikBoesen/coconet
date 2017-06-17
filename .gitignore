@@ -101,3 +101,5 @@ ENV/
 .mypy_cache/
 
 *.txt
+# Don't upload Bill Murray images
+*.jpg
