@@ -15,13 +15,13 @@ Two scripts are used to join a computer to the network, `join.sh` and `enact.sh`
 Here's a simple one-liner to join the botnet (all the scripts are up on my website for simplicity of URLs):
 
 ```sh
-curl https://erikboesen.com/downloads/join.sh | bash
+curl https://erikboesen.com/join.sh | bash
 ```
 
 or if you like simple URLs:
 
 ```sh
-curl -L erikboesen.com/downloads/join.sh | bash
+curl -L erikboesen.com/join.sh | bash
 ```
 
 ### Controlling

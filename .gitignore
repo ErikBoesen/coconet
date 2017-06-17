@@ -100,8 +100,9 @@ ENV/
 # mypy
 .mypy_cache/
 
+.DS_Store
 *.txt
-# Don't upload Bill Murray images
+# Bill Murray images
 *.jpg
-# Don't upload compressed apps
+# Compressed apps
 *.zip
