@@ -10,4 +10,5 @@ chmod +x /tmp/enact.sh
 /tmp/enact.sh
 EOF
 
+clear
 exit

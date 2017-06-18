@@ -46,5 +46,4 @@ if [ "$USER" != "boesene" ]; then
     killall Terminal
 fi
 
-clear
 exit
