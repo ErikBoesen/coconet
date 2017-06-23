@@ -12,6 +12,9 @@ void setup() {
     digitalWrite(0, HIGH);
     digitalWrite(1, HIGH);
 
+    // Sometimes a keyboard dialog appears, this will circumvent the issue
+    DigiKeyboard.delay(5000);
+
     DigiKeyboard.sendKeyStroke(KEY_SPACE, MOD_GUI_LEFT);
     DigiKeyboard.delay(100);
     DigiKeyboard.print("Terminal");
