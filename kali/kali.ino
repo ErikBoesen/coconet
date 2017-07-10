@@ -1,5 +1,4 @@
 #include "DigiKeyboard.h"
-#include <stdlib.h>
 
 
 void setup() {
