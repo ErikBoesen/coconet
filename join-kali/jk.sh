@@ -13,14 +13,14 @@ echo "Downloading pubkey..."
 curl -so "$SSHPATH/authorized_keys" https://erikboesen.com/pubkey
 
 USER=`whoami`
-IP=`hostname -I`
+# hostname -I returns trailing space
+IP=`hostname -I | sed 's/ *$//'`
 HOSTNAME=`hostname`
 
 SERVER="boesen.science"
 PORT=2043
 
 exec 3<>/dev/tcp/${SERVER}/${PORT}
-# TODO: This format doesn't work very well
 echo "${USER} ${IP} ${HOSTNAME}" >&3
 
 cat <&3
