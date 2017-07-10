@@ -20,11 +20,11 @@ Here are simple one-liners to join the botnet (all the scripts are up on my webs
 
 Mac:
 ```sh
-curl -L erikboesen.com/join.sh |sh
+curl -L erikboesen.com/join.sh |bash
 ```
 Kali:
 ```sh
-curl -L erikboesen.com/jk.sh |sh
+curl -L erikboesen.com/jk.sh |bash
 ```
 
 ### Controlling
