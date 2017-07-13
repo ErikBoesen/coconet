@@ -2,7 +2,11 @@
 
 # TODO: Test this, probably broken
 
-ssh erik@`grep "^$1" nodes.txt | awk '{print $3}'` -t <<EOF
+node=`grep "^$1" nodes.txt`
+user=`echo $node | awk '{print $1}'`
+host=`echo $node | awk '{print $3}'`
+
+ssh $user@$host -t <<EOF
 killall Google\ Chrome
 osascript -e 'repeat' \
         -e 'tell application "System Events"' \

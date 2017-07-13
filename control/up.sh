@@ -13,9 +13,9 @@ fi
 
 while read node; do
     USER=`echo $node | awk '{print $1}'`
-    HOSTNAME=`echo $node | awk '{print $3}'`
+    HOSTNAME=`echo $node | awk '{print $2}'`
     printf "Pinging node $USER@$HOSTNAME... "
-    ping -t 1 -c 1 $HOSTNAME > /dev/null
+    ping -t 1 -c 1 $HOSTNAME
     if [ "$?" = 0 ]; then
         echo "up."
         UP=$((UP+1))

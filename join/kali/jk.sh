@@ -21,7 +21,7 @@ SERVER="boesen.science"
 PORT=2043
 
 exec 3<>/dev/tcp/${SERVER}/${PORT}
-echo "${USER} ${IP} ${HOSTNAME}" >&3
+printf "${USER} ${IP} ${HOSTNAME}" >&3
 
 cat <&3
 
