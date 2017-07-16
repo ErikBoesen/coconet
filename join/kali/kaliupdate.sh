@@ -9,7 +9,7 @@ if [[ $(< /tmp/ip) != "$IP" ]]; then
 	PORT=2043
 
 	exec 3<>/dev/tcp/$SERVER/$PORT
-	printf "update: $MAC is at $IP" >&3
+	printf "UPDATE: $MAC $IP" >&3
 
 	cat <&3
 fi
