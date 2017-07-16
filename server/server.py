@@ -22,8 +22,12 @@ while True:
     print('[REQ] {}'.format(data))
     # Filter out raw HTTP requests
     if data.count('\n') <= 1:
-        req = re.search(r'^(\w+): ', data).group(0)[:-2]
-        content = data[len(req)+2:]
+        try:
+            req = re.search(r'^(\w+): ', data).group(0)[:-2]
+            content = data[len(req)+2:]
+        except AttributeError:
+            req = None
+            content = None
         if req == 'JOIN':
             # Don't write to file for join attempts from an owner
             if not any(owner in data for owner in OWNERS):
