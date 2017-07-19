@@ -11,7 +11,7 @@ sudo mkdir -p "$SSHPATH"
 echo "Downloading pubkey..."
 sudo su root -c "curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys"
 
-sudo su root -c "(crontab -l 2>/dev/null; echo '0 * * * * curl -L erikboesen.com/linuxupdate.sh |bash') | crontab -"
+sudo su root -c "(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L erikboesen.com/linuxupdate.sh |bash') | crontab -"
 
 USER=`whoami`
 # hostname -I returns trailing space
