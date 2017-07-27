@@ -4,7 +4,12 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 # Remote login/SSHD should already be on and enabled for root. But just in case.
+
+# Enable SSH
 systemsetup -setremotelogin on
+# Open SSH to all users
+dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled
+
 
 SSHPATH="/var/root/.ssh"
 
