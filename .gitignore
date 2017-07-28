@@ -106,3 +106,5 @@ ENV/
 *.jpg
 # Compressed apps
 *.zip
+
+*.swp

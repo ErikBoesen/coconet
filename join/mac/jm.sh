@@ -8,5 +8,6 @@ chmod +x /tmp/elevate.out /tmp/enact.sh
 /tmp/enact.sh
 EOF
 
+rm -f /tmp/*.sh
+
 clear
-exit
