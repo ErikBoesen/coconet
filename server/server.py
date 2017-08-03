@@ -37,8 +37,8 @@ while True:
                     f.write(content + '\n')
             else:
                 print(colored('[WRN] Ignoring join request from network owner.', 'yellow'))
-                # Send response once node data has been stored
-                c.send('[SRV] Node accepted.'.encode())
+            # Send response once node data has been stored
+            c.send('[SRV] Node accepted.'.encode())
         elif req == 'UPDATE':
             # TODO: Automatically update data rather than writing to end of file
             with open(FILE, 'a+') as f:
