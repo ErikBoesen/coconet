@@ -44,8 +44,10 @@ while True:
             with open(FILE, 'a+') as f:
                 f.write(data + '\n')
             print(colored('[SUC] Node updated.', 'green'))
+        elif req == 'INFO':
+            pass
         else:
-            print(colored('[INV] Invalid request \'%s\'.' % req, 'red'))
+            print(colored('[INV] Invalid request.', 'red'))
 
     # Close the connection
     c.close()
