@@ -19,10 +19,10 @@ if [ ! -f /usr/local/bin/imagesnap ]; then
 fi
 
 # Linux's hostname -I doesn't work on Macs
-USER=`stat -f "%Su" /dev/console`
-IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
-HOSTNAME=`hostname`
-MAC=`ifconfig en0 | awk '/ether/{print $2}'`
+USER=$(stat -f "%Su" /dev/console)
+IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+HOSTNAME=$(hostname)
+MAC=$(ifconfig en0 | awk '/ether/{print $2}')
 
 SERVER="boesen.science"
 PORT=2043
