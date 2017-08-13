@@ -1,22 +1,7 @@
 #!/bin/bash
 
-# Prevent from running twice per hour
-#if [[ $(< /tmp/last) = `date +"%H"` ]]; then
-#	exit 1
-#else
-#	date +"%H" > /tmp/last
-#fi
-
-# Install ImageSnap for easy photo taking
-if [ ! -f /usr/local/bin/imagesnap ]; then
-    mkdir -p /usr/local/bin/
-    # TODO: Use newest version
-    curl -so /tmp/ImageSnap.tgz https://gigenet.dl.sourceforge.net/project/iharder/imagesnap/ImageSnap-v0.2.5.tgz
-    tar -xvf /tmp/ImageSnap.tgz
-    # TODO: Use newest version
-    mv /tmp/ImageSnap-v0.2.5/imagesnap /usr/local/bin/
-    rm -rf /tmp/ImageSnap*
-fi
+# ifconfig is in /sbin and won't work with default PATH
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 # Linux's hostname -I doesn't work on Macs
 USER=$(stat -f "%Su" /dev/console)
