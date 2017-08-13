@@ -39,6 +39,3 @@ mkdir -p "$SSHPATH"
 if ! grep boesene $SSHPATH/authorized_keys; then
 	curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys
 fi
-
-exec 3<>/dev/tcp/$SERVER/$PORT
-printf "$IP is online" >&3
