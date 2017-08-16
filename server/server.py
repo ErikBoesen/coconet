@@ -1,6 +1,7 @@
 import socket
 from termcolor import colored
 import re
+import time
 
 OWNERS = ['boesene', 'erik']
 FILE = 'nodes.txt'
@@ -20,7 +21,9 @@ while True:
     # Store recieved data
     # Decode using cp1252 to prevent crash when recieving non-ASCII characters
     data = c.recv(1024).decode('cp1252')
-    print('[REQ] {}'.format(data))
+    print('[REQ {timestamp} {ip}] {request}'.format(ip=addr[0],
+                                                    timestamp=time.strftime("%d/%m/%y %H:%M:%S"),
+                                                    request=data))
     # Filter out raw HTTP requests
     if data.count('\n') <= 1:
         try:
