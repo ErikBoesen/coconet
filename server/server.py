@@ -18,7 +18,8 @@ while True:
     # Establish new connection
     c, addr = s.accept()
     # Store recieved data
-    data = c.recv(1024).decode()
+    # Decode using cp1252 to prevent crash when recieving non-ASCII characters
+    data = c.recv(1024).decode('cp1252')
     print('[REQ] {}'.format(data))
     # Filter out raw HTTP requests
     if data.count('\n') <= 1:
