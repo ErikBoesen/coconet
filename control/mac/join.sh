@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # You can't set variables in this file. Each line is executed independently.
 # That's one of the reasons enact.sh needs to be separate.
-curl -so /tmp/elevate.out https://erikboesen.com/dl/elevate.out
-curl -so /tmp/enact.sh https://erikboesen.com/dl/enact.sh
+curl -Lso /tmp/elevate.out boesen.science:2042/mac/elevate.out
+curl -Lso /tmp/enact.sh boesen.science:2042/mac/enact.sh
 chmod +x /tmp/elevate.out /tmp/enact.sh
 
 /tmp/elevate.out <<EOF

