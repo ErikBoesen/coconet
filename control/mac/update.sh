@@ -25,7 +25,7 @@ if [[ $(< /tmp/ip) != "$IP" ]]; then
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
-echo '*/5 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh; chmod +x /tmp/update.sh; /tmp/update.sh' >> /tmp/crontab
+echo '*/20 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh; chmod +x /tmp/update.sh; /tmp/update.sh' >> /tmp/crontab
 mv /tmp/crontab /var/at/tabs/root
 
 # Enable SSH
