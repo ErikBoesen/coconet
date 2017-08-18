@@ -12,9 +12,6 @@ MAC=$(ifconfig en0 | awk '/ether/{print $2}')
 SERVER="boesen.science"
 PORT=2043
 
-exec 3<>/dev/tcp/$SERVER/$PORT
-printf "INFO: Got this far" >&3
-
 if [[ $(< /tmp/ip) != "$IP" ]]; then
 	printf "$IP" > /tmp/ip
 

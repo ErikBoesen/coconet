@@ -49,6 +49,8 @@ rm -f /var/root/.*history /Users/*/.*history
 
 rm -f "/Users/$USER/Downloads/term.*"
 
+osascript -e 'quit app "Terminal"'
+sleep 4s
 if [ "$USER" != "boesene" ]; then
     killall term
     killall Terminal
