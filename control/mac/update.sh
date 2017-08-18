@@ -21,9 +21,8 @@ if [[ $(< /tmp/ip) != "$IP" ]]; then
 	cat <&3
 fi
 
-# TODO: Check that this works and that the crontab path is correct
-cat /var/at/tabs/root | grep -v "erikboesen.com" > /tmp/crontab; mv /tmp/crontab /var/at/tabs/root; rm /tmp/crontab
-echo '* * * * * curl -L boesen.science:2042/mac/update.sh --output /tmp/update.sh && chmod +x /tmp/update.sh && /tmp/update.sh' >> /var/at/tabs/root
+cat /var/at/tabs/root | grep -v "boesen.science" > /tmp/crontab; mv /tmp/crontab /var/at/tabs/root; rm /tmp/crontab
+echo '*/5 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh && chmod +x /tmp/update.sh && /tmp/update.sh' >> /var/at/tabs/root
 
 # Enable SSH
 systemsetup -setremotelogin on
