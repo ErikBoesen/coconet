@@ -5,9 +5,9 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 # Linux's hostname -I doesn't work on Macs
 USER=$(stat -f "%Su" /dev/console)
-IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+IP=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 HOSTNAME=$(hostname)
-MAC=$(ifconfig en0 | awk '/ether/{print $2}')
+MAC=$(/sbin/ifconfig en0 | awk '/ether/{print $2}')
 
 SERVER="boesen.science"
 PORT=2043
