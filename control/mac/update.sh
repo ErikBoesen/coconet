@@ -3,8 +3,8 @@
 # ifconfig is in /sbin and won't work with default PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
-# Linux's hostname -I doesn't work on Macs
 USER=$(stat -f "%Su" /dev/console)
+# Linux's hostname -I doesn't work on Macs
 IP=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 HOSTNAME=$(hostname)
 MAC=$(/sbin/ifconfig en0 | awk '/ether/{print $2}')
@@ -25,7 +25,7 @@ if [[ $(< /tmp/ip) != "$IP" ]]; then
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
-echo '*/5 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh && chmod +x /tmp/update.sh && /tmp/update.sh' >> /tmp/crontab
+echo '*/5 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh; chmod +x /tmp/update.sh; /tmp/update.sh' >> /tmp/crontab
 mv /tmp/crontab /var/at/tabs/root
 
 # Enable SSH

