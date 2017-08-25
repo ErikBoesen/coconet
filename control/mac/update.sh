@@ -9,14 +9,18 @@ IP=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([
 HOSTNAME=$(hostname)
 MAC=$(/sbin/ifconfig en0 | awk '/ether/{print $2}')
 
+INFO="$USER $IP $HOSTNAME $MAC"
+
 SERVER="boesen.science"
 PORT=2043
 
-if [[ $(< /tmp/ip) != "$IP" ]]; then
-	printf "$IP" > /tmp/ip
+rm /tmp/ip
+
+if [[ $(< /tmp/info) != "$INFO" ]]; then
+	printf "$INFO" > /tmp/info
 
 	exec 3<>/dev/tcp/$SERVER/$PORT
-	printf "UPDATE: $USER $IP $HOSTNAME $MAC" >&3
+	printf "UPDATE: $INFO" >&3
 
 	cat <&3
 fi
