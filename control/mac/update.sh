@@ -15,11 +15,11 @@ SERVER="boesen.science"
 PORT=2043
 
 rm /tmp/ip
+mv /tmp/info /etc/info
 
-if [[ $(< /tmp/info) != "$INFO" ]]; then
-	printf "$INFO" > /tmp/info
+if [[ $(< /etc/info) != "$INFO" ]]; then
+	printf "$INFO" > /etc/info
 
-	exec 3<>/dev/tcp/$SERVER/$PORT
 	printf "UPDATE: $INFO" >&3
 fi
 
@@ -42,6 +42,7 @@ fi
 
 rm /tmp/*.sh
 
-if [[ $(hostname) == "GM-Loaner-"* ]]; then
-	printf "INFO: $HOSTNAME $(ls /Users)" > /dev/tcp/$SERVER/$PORT
+if [[ $HOSTNAME == "GM-Loaner-"* ]]; then
+	USERS=$(ls /Users | grep -Ev '.localized|Guest|Shared|remotedesktop' | xargs | tr ' ' ',')
+	printf "INFO: $HOSTNAME $USERS" > /dev/tcp/$SERVER/$PORT
 fi

