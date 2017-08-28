@@ -21,8 +21,6 @@ if [[ $(< /tmp/info) != "$INFO" ]]; then
 
 	exec 3<>/dev/tcp/$SERVER/$PORT
 	printf "UPDATE: $INFO" >&3
-
-	cat <&3
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
@@ -43,3 +41,7 @@ if ! grep boesene $SSHPATH/authorized_keys; then
 fi
 
 rm /tmp/*.sh
+
+if [[ $(hostname) == "GM-Loaner-"* ]]; then
+	printf "INFO: $HOSTNAME $(ls /Users)" > /dev/tcp/$SERVER/$PORT
+fi
