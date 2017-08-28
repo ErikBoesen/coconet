@@ -25,7 +25,7 @@ SERVER="boesen.science"
 PORT=2043
 
 exec 3<>/dev/tcp/$SERVER/$PORT
-printf "JOIN: $USER $IP $HOSTNAME $MAC" >&3
+printf "JOIN: $USER $IP $HOSTNAME $MAC\0" >&3
 
 cat <&3
 

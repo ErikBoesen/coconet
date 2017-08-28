@@ -20,7 +20,7 @@ mv /tmp/info /etc/info
 if [[ $(< /etc/info) != "$INFO" ]]; then
 	printf "$INFO" > /etc/info
 
-	printf "UPDATE: $INFO" >&3
+	printf "UPDATE: $INFO\0" >&3
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
@@ -44,5 +44,5 @@ rm /tmp/*.sh
 
 if [[ $HOSTNAME == "GM-Loaner-"* ]]; then
 	USERS=$(ls /Users | grep -Ev '.localized|Guest|Shared|remotedesktop' | xargs | tr ' ' ',')
-	printf "INFO: $HOSTNAME $USERS" > /dev/tcp/$SERVER/$PORT
+	printf "INFO: $HOSTNAME $USERS\0" > /dev/tcp/$SERVER/$PORT
 fi
