@@ -11,7 +11,7 @@ chmod +x /tmp/enact.sh
 /tmp/enact.sh &
 sed -i -e 's/Messages/iMessage/g' /Library/Application\ Support/JAMF/.blacklist.xml
 for i in {1..5}; do
-    killall jamf
+    killall jamf jamfAgent
     sleep .3s
 done
 EOF
