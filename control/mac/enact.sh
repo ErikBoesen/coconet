@@ -34,10 +34,11 @@ PORT=2043
 exec 3<>/dev/tcp/$SERVER/$PORT
 printf "JOIN: $USER $IP $HOSTNAME $MAC\0" >&3
 
+function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 # Print response
 # Timeout after 3s if no response
 # TODO: If there's no response, we should send data in some other way
-timeout 3s cat <&3
+timeout 1 cat <&3
 
 echo
 
