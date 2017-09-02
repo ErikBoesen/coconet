@@ -108,3 +108,9 @@ ENV/
 *.zip
 
 *.swp
+
+# Object file
+*.o
+
+# Ada Library Information
+*.ali

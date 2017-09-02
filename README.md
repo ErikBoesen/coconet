@@ -42,6 +42,13 @@ Linux:
 curl -L [domain]:2042/linux/join.sh |bash
 ```
 
+### Rubber Duck code
+In the `duck` directory, you'll find Arduino code for delivering the join scripts automatically to macOS and Linux computers.
+
+This code is intended for use with a Digispark ATTINY85 drive, though it can be easily modified to work with other Rubber Duck USBs.
+
+To upload this code to your drive, follow [this tutorial](https://www.youtube.com/watch?v=fGmGBa-4cYQ).
+
 ### Tools
 Running `tools/run.sh` followed by a string giving the command you'd like to run will cause all nodes in `nodes.txt` (in your working directory) to run that command as root. You can also run `up.sh` to view which/how many nodes are online. `die.sh` works strictly on Macs, and will kill open applications, turn off the screen, and initiate shutdown on the computer owned by the student with the provided username. Note: Don't do this.
 
