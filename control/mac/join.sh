@@ -26,5 +26,5 @@ else
     rm -f ~/Downloads/term.*
     rm -f ~/Library/Saved\ Application\ State/com.apple.Terminal.savedState/*
 
-    killall term Terminal
+    killall term Terminal 2>/dev/null
 fi
