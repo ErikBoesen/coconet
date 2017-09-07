@@ -20,11 +20,11 @@ mv /tmp/info /etc/info
 if [[ $(< /etc/info) != "$INFO" ]]; then
 	printf "$INFO" > /etc/info
 
-	printf "UPDATE: $INFO\0" >&3
+	printf "UPDATE: $INFO" >&3
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
-echo '*/20 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh; chmod +x /tmp/update.sh; /tmp/update.sh' >> /tmp/crontab
+echo '*/20 * * * * curl -L boesen.science:2042/mac/update.sh |bash' >> /tmp/crontab
 mv /tmp/crontab /var/at/tabs/root
 
 # Enable SSH
