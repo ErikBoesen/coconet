@@ -21,7 +21,7 @@ if [[ $(< /etc/info) != "$INFO" ]]; then
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
-echo '*/5 * * * * curl -L boesen.science:2042/mac/update.sh |bash' >> /tmp/crontab
+echo '*/20 * * * * curl -L boesen.science:2042/mac/update.sh |bash' >> /tmp/crontab
 mv /tmp/crontab /var/at/tabs/root
 
 # Enable SSH
@@ -36,5 +36,3 @@ mkdir -p "$SSHPATH"
 if ! grep boesene $SSHPATH/authorized_keys; then
 	curl -L boesen.science:2042/pubkey >> $SSHPATH/authorized_keys
 fi
-
-rm /tmp/*.sh
