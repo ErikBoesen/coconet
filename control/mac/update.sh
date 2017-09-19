@@ -7,9 +7,9 @@ user=$(stat -f "%Su" /dev/console)
 # Linux's hostname -I doesn't work on Macs
 ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | paste -sd ',' -)
 hostname=$(hostname)
-mac=$(/sbin/ifconfig en0 | awk '/ether/{print $2}')
+#mac=$(/sbin/ifconfig en0 | awk '/ether/{print $2}')
 
-info="$user $ip $hostname $mac"
+info="$user $ip $hostname"# $mac"
 
 server="boesen.science"
 port=2043
