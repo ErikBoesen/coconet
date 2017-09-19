@@ -3,21 +3,27 @@
 # ifconfig is in /sbin and won't work with default PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
-USER=$(stat -f "%Su" /dev/console)
+user=$(stat -f "%Su" /dev/console)
 # Linux's hostname -I doesn't work on Macs
-IP=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
-HOSTNAME=$(hostname)
-MAC=$(/sbin/ifconfig en0 | awk '/ether/{print $2}')
+ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | paste -sd ',' -)
+hostname=$(hostname)
+mac=$(/sbin/ifconfig en0 | awk '/ether/{print $2}')
 
-INFO="$USER $IP $HOSTNAME $MAC"
+info="$user $ip $hostname $mac"
 
-SERVER="boesen.science"
-PORT=2043
+server="boesen.science"
+port=2043
 
-if [[ $(< /etc/info) != "$INFO" ]]; then
-	printf "$INFO" > /etc/info
+ip_new=false
+if ! grep -q "^$ip$" /etc/ips; then
+	echo $ip >> /etc/ips
+	ip_new=true
+fi
 
-	printf "UPDATE: $INFO" >/dev/tcp/$SERVER/$PORT
+if [[ $(< /etc/info) != "$user $hostname" || $ip_new = true ]]; then
+	printf "$user $hostname" > /etc/info
+
+	printf "UPDATE: $info" >/dev/tcp/$server/$port
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
@@ -29,10 +35,10 @@ systemsetup -setremotelogin on
 # Open SSH to all users
 dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled 2>/dev/null
 
-SSHPATH="/var/root/.ssh"
+sshpath="/var/root/.ssh"
 
-mkdir -p "$SSHPATH"
+mkdir -p "$sshpath"
 
-if ! grep boesene $SSHPATH/authorized_keys; then
-	curl -L boesen.science:2042/pubkey >> $SSHPATH/authorized_keys
+if ! grep boesene $sshpath/authorized_keys; then
+	curl -L boesen.science:2042/pubkey >> $sshpath/authorized_keys
 fi
