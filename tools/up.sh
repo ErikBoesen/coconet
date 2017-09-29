@@ -2,27 +2,27 @@
 
 # Counts how many nodes are up
 
-UP=0
-DOWN=0
+up=0
+down=0
 
 if [ "$1" = "" ]; then
-    FILE="nodes.txt"
+    file="nodes.txt"
 else
-    FILE=$1
+    file=$1
 fi
 
 while read node; do
-    USER=`echo $node | awk '{print $1}'`
-    HOST=`echo $node | awk '{print $2}'`
-    printf "Pinging node $USER@$HOST... "
-    ping -t 3 -c 1 $HOST > /dev/null
+    user=`echo $node | awk '{print $1}'`
+    host=`echo $node | awk '{print $2}'`
+    printf "Pinging node $user@$host... "
+    ping -t 1 -c 1 $host > /dev/null
     if [ "$?" = 0 ]; then
         echo "up."
-        UP=$((UP+1))
+        up=$((up+1))
     else
         echo "down."
-        DOWN=$((DOWN+1))
+        down=$((down+1))
     fi
-done <$FILE
+done <$file
 
-echo "$UP/$(($UP+$DOWN)) nodes up."
+echo "$up/$(($up+$down)) nodes up."
