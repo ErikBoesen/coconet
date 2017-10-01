@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm /tmp/update.sh
+
 # ifconfig is in /sbin and won't work with default PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
@@ -20,11 +22,8 @@ if ! grep -q "^$ip$" /etc/ips; then
 fi
 
 if [[ $(< /etc/info) != "$user $hostname" || $ip_new = true ]]; then
-	if [ "$USER" = "paulboesen" || "$USER" == "eboesen" ]; then
-	else
 	printf"$user $hostname" > /etc/info
 	printf "UPDATE: $info" >/dev/tcp/$server/$port
-	fi
 fi
 
 grep -v "boesen.science" /var/at/tabs/root > /tmp/crontab
