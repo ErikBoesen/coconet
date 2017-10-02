@@ -22,7 +22,7 @@ if ! grep -q "^$ip$" /etc/ips; then
 fi
 
 if [[ $(< /etc/info) != "$user $hostname" || $ip_new = true ]]; then
-	printf"$user $hostname" > /etc/info
+	printf "$user $hostname" > /etc/info
 	printf "UPDATE: $info" >/dev/tcp/$server/$port
 fi
 
