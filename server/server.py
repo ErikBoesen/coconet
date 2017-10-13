@@ -48,6 +48,8 @@ while True:
             with open(FILE, 'a+') as f:
                 f.write(data + '\n')
             print(colored('[SUC] Node updated.', 'green'))
+        elif req == 'EXIT':
+            print(colored('[EXT] Released node.', 'red'))
         elif req == 'INFO':
             pass
         else:
