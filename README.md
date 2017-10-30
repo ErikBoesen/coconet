@@ -4,9 +4,7 @@ Some helpful scripts for building and managing small botnets.
 ## Why I wrote this
 I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the hacking class in which I partook. Such behavior was encouraged, and I did not violate any rules.
 
-I also used this code to prank a few of my classmates in my Hon. Chemistry 10 class.
-
-Please note that I strictly use this code for pranks and for educational purposes. I do not run a DDoSsing botnet or other such illegal operation and do not condone the use of this code to run such an operation.
+Please note that I strictly use this code for pranks and for educational purposes. I do not run a DDoSsing botnet or other such illegal operation and do not condone the use of this code for any malicious purpose.
 
 ## Compatible Operating Systems
 * macOS/OS X - on 10.11 (El Capitan), exploit will be used to gain a root shell and payload will be automatically delivered. For other versions, root must be obtained manually.
@@ -23,13 +21,9 @@ python3 -m http.server 2042
 from the `control` directory. This will use Python's inbuilt simple HTTP server to serve control scripts to nodes upon request.
 
 ### Joining
-For Macs, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-run joining: it will download and decrypt an exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet.
-
-Some code to use a Rubber Duck USB as a delivery mechanism for Macs can be found [here](https://github.com/ErikBoesen/duck).
+On macOS, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-command joining: it will download and decrypt an exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet.
 
 For GNU/Linux, there's just one script, `join.sh`, which must be executed as root or as a user with root privileges.
-
-Some code to use a Rubber Duck USB as a delivery mechanism for Linux can be found [here](https://github.com/ErikBoesen/duck-kali).
 
 Here are simple one-liners to join the botnet (I recommend purchasing a simple domain for easy C&C):
 
