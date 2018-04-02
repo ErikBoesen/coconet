@@ -1,10 +1,10 @@
 # net
-Some helpful scripts for building and managing small botnets.
+Code for building and administrating a rudimentary botnet.
+
+**Please note that I strictly used this code for educational purposes as explained below. I do not and never have run a DDoSsing botnet or other such illegal operation and do not condone the use of this code for any malicious purpose.**
 
 ## Why I wrote this
 I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the hacking class in which I partook. Such behavior was encouraged, and I did not violate any rules.
-
-Please note that I strictly use this code for pranks and for educational purposes. I do not run a DDoSsing botnet or other such illegal operation and do not condone the use of this code for any malicious purpose.
 
 ## Compatible Operating Systems
 * macOS/OS X - on 10.11 (El Capitan), exploit will be used to gain a root shell and payload will be automatically delivered. For other versions, root must be obtained manually.
