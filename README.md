@@ -1,3 +1,5 @@
+<img alt="Lynchburg College logo" src="http://www.commonapp.org/files/styles/400-y/public/school/logo/Homepage_LYNCHBURG_Lynchburg-logo-500x500.png" align="right" width=300 style="border-radius: 50%;">
+
 # net
 Code for building and administrating a rudimentary botnet.
 
