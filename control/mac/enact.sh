@@ -1,6 +1,4 @@
 #!/bin/bash
-# MUST be run as root. jm.sh should be used to automate exploitation and running of
-# this script on Macs running OS X <= 10.11.6.
 host=boesen.science
 
 # Enable SSH
