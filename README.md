@@ -9,13 +9,21 @@ I used this code at the Virginia Residential Governor's School for Math, Science
 
 ## How it works
 ### Command & Control
-C&C is managed on ports `2042` & `2043` of a server. A simple Python script opens a socket on port `2043` which listens for incoming data from nodes. All requests to the server are printed to the terminal, and important ones may be written into `nodes.txt`.
+C&C is managed on ports `2042` & `2043` of a server.
 
-To make control scripts available, run
+Instructional scripts are served via HTTP on port `2042`. Run
 ```sh
 python3 -m http.server 2042
 ```
-from the `control` directory. This will use Python's inbuilt simple HTTP server to serve control scripts to nodes upon request.
+from the `control` directory to make them available to nodes upon request.
+
+A simple Python script opens a socket on port `2043` which listens for incoming data from nodes. All requests to the server are printed to the terminal, and important ones may be written into a file `nodes.txt`. Run
+```sh
+python3 server.py
+```
+after installing the dependencies listed in `requirements.txt` to listen for incoming data.
+
+This process can be streamlined by using `./launch.sh` to automatically open two `tmux` windows with the appropriate commands.
 
 ### Joining
 On macOS, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-command joining: it will download and decrypt an exploit needed to elevate (on OS X El Capitan) to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet. If you already have root access, you can just run `enact.sh` directly.
