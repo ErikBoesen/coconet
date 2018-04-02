@@ -54,7 +54,7 @@ In the `duck` directory, you'll find Arduino code for delivering the join script
 
 I used this code with a Digispark ATTINY85 drive, though it can be easily modified to work with other Rubber Duck USBs.
 
-During my cybersecurity class in which I developed `net`, I plugged the drive into users' computers while they weren't looking, saving me the inconvenience of having to attain keyboard access.
+During the cybersecurity class in which I developed `net`, I plugged the drive into users' computers while they weren't looking, saving me the inconvenience of having to attain keyboard access.
 
 To upload this code to your drive, follow [this tutorial](https://www.youtube.com/watch?v=fGmGBa-4cYQ).
 
