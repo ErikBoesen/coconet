@@ -2,7 +2,7 @@
 host=boesen.science
 
 # Prevent from running twice per hour
-if [[ $(< /tmp/last) = `date +"%H"` ]]; then
+if [[ $(< /tmp/last) = $(date +"%H") ]]; then
 	exit 1
 else
 	date +"%H" > /tmp/last

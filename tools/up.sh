@@ -12,8 +12,8 @@ else
 fi
 
 while read node; do
-    user=`echo $node | awk '{print $1}'`
-    host=`echo $node | awk '{print $2}'`
+    user=$(echo $node | awk '{print $1}')
+    host=$(echo $node | awk '{print $2}')
     printf "Pinging node $user@$host... "
     ping -t 1 -c 1 $host > /dev/null
     if [ "$?" = 0 ]; then
