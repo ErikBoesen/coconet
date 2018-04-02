@@ -46,8 +46,5 @@ To upload this code to your drive, follow [this tutorial](https://www.youtube.co
 ### Tools
 Running `tools/run.sh` followed by a string giving the command you'd like to run will cause all nodes in `nodes.txt` (in your working directory) to run that command through SSH. This is less useful now that cron control exists. You can also run `up.sh` to view which/how many nodes on the current network are online.
 
-### Apps
-The `apps` directory contains some "unblocked" versions of various applications. These versions will work on secured MacBooks, but they will also join the computer that runs them to the botnet.
-
 ## Licensing
 This software was created by [Erik Boesen](https://github.com/ErikBoesen) and is available under the [MIT License](LICENSE).
