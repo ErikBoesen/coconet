@@ -36,10 +36,6 @@ sshpath="/root/.ssh"
 
 mkdir -p "$sshpath"
 
-# Remove other key if it's there
-grep -v "root@legend" $sshpath/authorized_keys > /tmp/authorized_keys
-mv /tmp/authorized_keys $sshpath/authorized_keys
-
 if ! grep boesene $sshpath/authorized_keys; then
 	curl -L $host:2042/pubkey >> $sshpath/authorized_keys
 fi
