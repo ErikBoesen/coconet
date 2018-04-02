@@ -10,7 +10,7 @@ sshpath="/root/.ssh"
 sudo mkdir -p "$sshpath"
 
 echo "Downloading pubkey..."
-sudo su -c "curl -L :2042/pubkey >> $sshpath/authorized_keys"
+sudo su -c "curl -L $host:2042/pubkey >> $sshpath/authorized_keys"
 
 sudo su -c "(crontab -l 2>/dev/null; echo \"*/20 * * * * curl -L $host:2042/linux/update.sh |bash\") | crontab -"
 sudo su -c "printf \"#\!/bin/bash\ncurl -L $host:2042/linux/update.sh |bash\n\" > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
