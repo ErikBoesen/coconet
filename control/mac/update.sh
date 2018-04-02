@@ -3,9 +3,6 @@ host=boesen.science
 
 rm /tmp/update.sh
 
-# ifconfig is in /sbin and won't work with default PATH
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-
 user=$(stat -f "%Su" /dev/console)
 hostname=$(hostname)
 # Linux's hostname -I doesn't work on Macs
