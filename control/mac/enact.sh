@@ -3,9 +3,6 @@
 # this script on Macs running OS X <= 10.11.6.
 host=boesen.science
 
-# Some programs aren't in $PATH by default
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-
 # Enable SSH
 systemsetup -setremotelogin on >/dev/null
 # Open SSH to all users
