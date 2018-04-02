@@ -1,4 +1,4 @@
-<img alt="Lynchburg College logo" src="http://www.commonapp.org/files/styles/400-y/public/school/logo/Homepage_LYNCHBURG_Lynchburg-logo-500x500.png" align="right" width=300 style="border-radius: 50%;">
+<img alt="Lynchburg College logo" src="http://www.commonapp.org/files/styles/400-y/public/school/logo/Homepage_LYNCHBURG_Lynchburg-logo-500x500.png" align="right" width=300>
 
 # net
 Code for building and administrating a rudimentary botnet.
@@ -18,7 +18,7 @@ python3 -m http.server 2042
 from the `control` directory. This will use Python's inbuilt simple HTTP server to serve control scripts to nodes upon request.
 
 ### Joining
-On macOS, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-command joining: it will download and decrypt an exploit needed to elevate (on OS X El Capitan) to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet.
+On macOS, two scripts are used to join a computer to the network, `join.sh` and `enact.sh`. `join.sh` allows one-command joining: it will download and decrypt an exploit needed to elevate (on OS X El Capitan) to a root shell and then run `enact.sh` in that root shell automatically. That script will handle joining the botnet. If you already have root access, you can just run `enact.sh` directly.
 
 For GNU/Linux, there's just one script, `join.sh`, which must be executed as root or as a user with root privileges.
 
