@@ -63,3 +63,5 @@ Running `tools/run.sh` followed by a string giving the command you'd like to run
 
 ## Licensing
 This software was created by [Erik Boesen](https://github.com/ErikBoesen) and is available under the [MIT License](LICENSE).
+
+I'm not affiliated with Lynchburg College in any way, nor does the college endorse this software.
