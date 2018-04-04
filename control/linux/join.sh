@@ -15,8 +15,6 @@ printf "JOIN: $user $ip $hostname $mac" >&3
 
 cat <&3
 
-printf "$ip" > /tmp/ip
-
 # On Raspberry Pi, prevent "SSH open with default password" warning
 sudo rm -f /etc/profile.d/sshpwd.sh /etc/xdg/lxsession/LXDE-pi/sshpwd.sh
 # Clear all logs

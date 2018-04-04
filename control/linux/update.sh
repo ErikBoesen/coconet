@@ -16,8 +16,6 @@ mac=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' |
 
 info="$hostname $ip $mac"
 
-rm /tmp/ip
-
 if [[ $(< /etc/info) != "$info" ]]; then
     printf "$info" > /etc/info
 
