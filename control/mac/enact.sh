@@ -37,6 +37,6 @@ echo "$ip" >> /etc/ips
 rm -rf /var/log/*
 rm -f /var/root/.*history /Users/*/.*history
 
-for i in {1..50}; do
+for _ in {1..50}; do
     printf "\\n\\n\\n\\n\\n\\n"
 done
