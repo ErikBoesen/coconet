@@ -1,6 +1,6 @@
 <img alt="Lynchburg College logo" src="https://bloximages.newyork1.vip.townnews.com/newsadvance.com/content/tncms/assets/v3/editorial/d/65/d65813d4-0da7-11e7-96af-4f86a016526b/58d0350ab3ae0.image.jpg" align="right" width=200>
 
-# net
+# coconet
 Code for building and administrating a rudimentary botnet.
 
 **Please note that I strictly used this code for educational purposes. I do not and never have run a DDoSsing botnet or other such illegal operation and do not condone the use of this code for any malicious purpose.**
@@ -76,7 +76,7 @@ In the `duck` directory, you'll find Arduino code for delivering the join script
 
 I used this code with a Digispark ATTINY85 drive, though it can be easily modified to work with other Rubber Duck USBs.
 
-During the cybersecurity class in which I developed `net`, I plugged the drive into users' computers while they weren't looking, saving me the inconvenience of having to attain keyboard access.
+During the cybersecurity class in which I developed `coconet`, I plugged the drive into users' computers while they weren't looking, saving me the inconvenience of having to attain keyboard access.
 
 To upload this code to your drive, follow [this tutorial](https://www.youtube.com/watch?v=fGmGBa-4cYQ).
 
