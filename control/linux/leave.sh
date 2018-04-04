@@ -7,12 +7,12 @@ echo "Removing crontabs..."
 
 read -p "Disable SSH (not recommended)? [y/N] " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	printf "Stopping SSHD..."
-	systemctl stop ssh.service
-	echo " done."
-	printf "Removing SSHD from startup programs..."
-	systemctl disable ssh.service
-	echo " done."
+    printf "Stopping SSHD..."
+    systemctl stop ssh.service
+    echo " done."
+    printf "Removing SSHD from startup programs..."
+    systemctl disable ssh.service
+    echo " done."
 fi
 
 grep -v "$host" /var/spool/cron/tabs/root > /tmp/crontab
