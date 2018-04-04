@@ -13,7 +13,7 @@ Through the development of this totally-legal codebase, I learned a lot about ne
 Though I'd never use an attack like this against anyone without permission, there are people who would. As such, I'd recommend that anyone who owns or uses a computer (especially a laptop or other portable device) build some healthy security habits:
 * Obviously, password-protect your device, and require authentication to log in after sleep.
 * Remove any delay between closure of your device and the your screen lock becoming active. This may annoy you if you accidentally close the computer, but it will protect you from mistakenly thinking your computer is secure enough to be left alone when it won't be for five minutes.
-* Never, ever leave your computer unlocked and/or unattended. By the end of my Governor's School class, I was able to take total root control of with only 12 seconds of typing. Imagine what someone with genuine malevolent intentions could do if you let them touch your computer.
+* Never, ever leave your computer unlocked and/or unattended. By the end of my Governor's School class, I was able to seize total remote control as root with only 12 seconds of typing. Imagine what someone with genuine malevolent intentions could do if you let them touch your computer.
 
 ## How it works
 In brief, physical access can be used by an attacker to enter a simple command to download and run a shell script which will set up that computer as a new node in the network. This process involves enabling SSH and giving public key access to the root account, and adding a root cronjob to periodically download and run an update script from the Command & Control server (detailed below).
