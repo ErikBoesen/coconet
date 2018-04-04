@@ -8,6 +8,12 @@ Code for building and administrating a rudimentary botnet.
 I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the cybersecurity class in which I partook. This activity was part of the class, and I absolutely never violated any rules.
 
 ## How it works
+In brief, physical access can be used by an attacker to enter a simple command to download and run a shell script which will set up that computer as a new node in the network. This process involves enabling SSH and giving public key access to the root account, and adding a root cronjob to periodically download and run an update script from the Command & Control server (detailed below).
+
+That update script will automatically reopen any backdoors which may have been closed since the last run. Code can be added to perform any task desired.
+
+Thus, an operator may control nodes via SSH or by adding code for all nodes to run into update scripts. Reverse shells can also be used for finer control sans direct access network access for SSH.
+
 ### Command & Control
 C&C is managed on ports `2042` & `2043` of a server.
 
