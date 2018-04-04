@@ -102,10 +102,6 @@ ENV/
 
 .DS_Store
 *.txt
-# Bill Murray images
-*.jpg
-# Compressed apps
-*.zip
 
 *.swp
 
