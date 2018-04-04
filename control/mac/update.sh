@@ -14,7 +14,7 @@ port=2043
 
 ip_new=false
 if ! grep -q "^$ip$" /etc/ips; then
-	echo $ip >> /etc/ips
+	echo "$ip" >> /etc/ips
 	ip_new=true
 fi
 
