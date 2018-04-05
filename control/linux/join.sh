@@ -13,7 +13,7 @@ mac=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' |
 exec 3<>/dev/tcp/$host/$up_port
 printf "JOIN: $user $ip $hostname $mac" >&3
 
-cat <&3
+timeout 1 cat <&3
 
 # On Raspberry Pi, prevent "SSH open with default password" warning
 sudo rm -f /etc/profile.d/sshpwd.sh /etc/xdg/lxsession/LXDE-pi/sshpwd.sh
