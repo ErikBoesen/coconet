@@ -7,6 +7,11 @@ Code for building and administrating a rudimentary botnet.
 
 I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the cybersecurity class in which I partook. This activity was part of the class, and I absolutely never violated any rules.
 
+## What's a "coconet?"
+The full name of the Governor's School's Cybersecurity class was "Come out, come out, wherever you are." Yes, yes, I know this was a poor decision. I nevertheless named this repository after an abbreviation of that name, plus "net," as in botnet.
+
+Also, it sounds like "coconut." So there's that.
+
 ## Lessons Learned
 Through developing this codebase, I learned a lot about networking, shell scripting, and especially security. I realized just how dangerous it can be to allow others physical access to one's computer, and as such I've been far more careful henceforth to follow common-sense security precautions.
 
