@@ -5,8 +5,8 @@ up_port=2043
 
 # Don't use whoami, will generally be root, which is useless
 user=$(ls /home | xargs -n1 | sort -u | xargs | tr ' ' ',')
-# hostname -I returns trailing space
-ip=$(hostname -I | sed 's/ *$//')
+# hostname -I sometimes returns trailing space
+ip=$((hostname -I || hostname -i) 2>/dev/null | sed 's/ *$//')
 hostname=$(hostname)
 mac=$(cat /sys/class/net/*/address | grep -v "00:00:00:00:00:00" | tr '\n' ',' | sed 's/,*$//')
 
