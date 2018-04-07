@@ -8,21 +8,21 @@ Code for building and administrating a rudimentary botnet.
 I used this code at the Virginia Residential Governor's School for Math, Science, and Technology to take over 36 Raspberry Pi microcomputers and Kali Linux desktops in the cybersecurity class in which I partook. This activity was part of the class, and I absolutely never violated any rules.
 
 ## What's a "coconet?"
-The full name of the Governor's School's Cybersecurity class was "Come out, come out, wherever you are." Yes, yes, I know this was a poor decision. I nevertheless named this repository after an abbreviation of that name, plus "net," as in botnet.
+The full name of the Governor's School's Cybersecurity class was "Come Out, Come Out, Wherever You Are." Yes. I know. I nevertheless named this repository after an abbreviation of that name, plus "net," as in botnet.
 
-Also, it sounds like "coconut." So there's that.
+Also, it sounds like "coconut." What's not to like?
 
 ## Lessons Learned
-Through developing this codebase, I learned a lot about networking, shell scripting, and especially security. I realized just how dangerous it can be to allow others physical access to one's computer, and as such I've been far more careful henceforth to follow common-sense security precautions.
+Through developing this codebase, I learned a lot about networking, shell scripting, and security. I realized just how dangerous it can be to allow others physical access to one's computer, and as such I've been far more careful henceforth to follow common-sense security precautions.
 
-Though I'd never use an attack like this against anyone without permission (outside the aforementioned scenario), there are people who certainly would. As such, owners of (especially portable) computers ought build some healthy security habits:
+Though I'd never use an attack like this against anyone without permission (outside the aforementioned scenario), there are people who certainly would. As such, owners of (especially portable) computers ought build, at the bare minimum, the following healthy security habits:
 
 * Obviously, password-protect your device, and require authentication to log in after sleep.
 * Remove any delay between closure of your device and the your screen lock becoming active. This may annoy you if you accidentally close the computer, but it will protect you from mistakenly thinking your computer is secure enough to be left alone when it won't be for five minutes.
-* Never, ever leave your computer unlocked and/or unattended. By the end of my Governor's School class, I was able to seize total remote control as root with only 12 seconds of typing. Imagine what someone with genuine malevolent intentions could do if you let them touch your computer.
+* Never, ever leave your computer unlocked and/or unattended. By the end of my Governor's School class, I was able to seize total remote control of a Mac or Linux device, as root, with only 12 seconds of typing. Imagine what someone with genuine malevolent intentions (and more experience than a High School sophomore) could do if you let them touch your computer.
 * If you must leave your computer unattended, close it to prevent anyone else taking over control when you walk away.
 
-These changes won't solve every security problem, but they'll make it much harder for someone using a system like this one to break in.
+These changes definitely won't solve every security problem, but they'll make it much harder for someone to exploit your having given them physical access to your device.
 
 ## How it works
 In brief, physical access can be used by an attacker to enter a simple command to download and run a shell script which will set up that computer as a new node in the network. This process involves enabling SSH and giving public key access to the root account, and adding a root cronjob to periodically download and run an update script from the Command & Control server (detailed below).
