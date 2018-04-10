@@ -15,7 +15,7 @@ Also, it sounds like "coconut." What's not to like?
 ## Lessons Learned
 Through developing this codebase, I learned a lot about networking, shell scripting, and security. I realized just how dangerous it can be to allow others physical access to one's computer, and as such I've been far more careful henceforth to follow common-sense security precautions.
 
-Though I'd never use an attack like this against anyone without permission (outside the aforementioned scenario), there are people who certainly would. As such, owners of (especially portable) computers ought build, at the bare minimum, the following healthy security habits:
+Though I'd never use an attack like this against anyone without permission (outside the aforementioned scenario), there are people who certainly would. As such, owners of (especially portable) computers ought to build, at the bare minimum, the following healthy security habits:
 
 * Obviously, password-protect your device, and require authentication to log in after sleep.
 * Remove any delay between closure of your device and the your screen lock becoming active. This may annoy you if you accidentally close the computer, but it will protect you from mistakenly thinking your computer is secure enough to be left alone when it won't be for five minutes.
