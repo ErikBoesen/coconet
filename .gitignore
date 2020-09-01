@@ -105,8 +105,7 @@ ENV/
 
 *.swp
 
-# Object file
-*.o
 
-# Ada Library Information
+# Arduino
+*.o
 *.ali
